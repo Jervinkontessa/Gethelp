@@ -1,0 +1,3 @@
+SELECT users.id,users.nama,users.email,users.password,jenis_akun.nama AS jenis_akun,users.phone,users.image,ktp,selfie_ktp,npwp,users.tanggal_dibuat,users.verifikasi,users.status 
+FROM `users` 
+INNER JOIN jenis_akun ON users.id_jenisakun = jenis_akun.id

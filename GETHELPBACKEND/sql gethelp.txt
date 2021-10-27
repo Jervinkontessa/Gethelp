@@ -1,0 +1,15 @@
+SELECT campaign.id, category.nama, campaign.nama_campaign,slug,campaign.users_id,target_donasi, campaign.tanggal_dibuat,tanggal_berakhir,datediff(tanggal_berakhir, current_date()) as hari_tersisa 
+FROM `campaign`
+JOIN category ON category_id = category.id
+WHERE campaign.status = 1
+
+SELECT t1.id,
+       t1.nama_campaign,
+       SUM(campaign.jumlah_donasi) AS jumlah
+FROM   (SELECT nama_campaign,campaign.id,transaksi_midtrans.campaign_id,
+               transaksi_midtrans.gross_amount,
+               NULL AS jumlah_donasi
+        FROM   transaksi_midtrans,
+               campaign
+        WHERE  campaign.id = transaksi_midtrans.campaign_id
+        ) AS t1
