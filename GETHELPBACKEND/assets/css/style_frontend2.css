@@ -1,0 +1,17 @@
+.form-control::placeholder {
+    color: #575757;
+}
+
+.form-control:-ms-input-placeholder {
+    color: #575757;
+}
+
+.form-control::-ms-input-placeholder {
+    color: #575757;
+}
+
+.custom-checkbox>[type="checkbox"]:not(:checked)+label:before,
+.custom-checkbox>[type="checkbox"]:checked+label:before {
+    border: 1px solid #000;
+    background: #fff;
+}

@@ -35,9 +35,6 @@
                                     <th>Nama User</th>
                                     <th>jenis_akun</th>
                                     <th>Email</th>
-                                    <th>Phone Number</th>
-                                    <th>Tanggal dibuat</th>
-                                    <th>Dokumen</th>
                                     <th>Verifikasi</th>
                                     <th>Status</th>
                                     <th>Action</th>
@@ -52,45 +49,22 @@
                                         <td><?= $adm['nama'] ?></td>
                                         <td><?= $adm['jenis_akun']; ?></td>
                                         <td><?= $adm['email'] ?></td>
-                                        <td class="text-center">
-                                            <?php
-                                            if ($adm['phone'] != '') {
-                                            ?>
-                                                <?= $adm['phone']  ?>
-                                            <?php
-                                            } else {
-                                            ?>
-                                                <span class="badge bg-danger text-white">Belum memberikan nomor</span>
-                                            <?php
-                                            }
-                                            ?>
-                                        </td>
-                                        <td class="text-center"><?= date('d F Y', strtotime($adm['tanggal_dibuat'])) ?></td>
-                                        <td class="text-center">
-                                            <?php
-                                            if ($adm['jenis_akun'] = 'Individu' && $adm['ktp'] != '' && $adm['selfie_ktp'] != '') {
-                                            ?>
-                                                <span class="badge bg-success text-white">Dokumen sudah di upload lengkap</span>
-                                            <?php
-                                            } elseif ($adm['jenis_akun'] = 'Yayasan' && $adm['ktp'] != '' && $adm['selfie_ktp'] != '' && $adm['npwp'] != '') {
-                                            ?>
-                                                <span class="badge bg-success text-white">Pihak Yayasan sudah mengupload lengkap</span>
-                                            <?php
-                                            } else {
-                                            ?>
-                                                <span class="badge bg-danger text-white">Dokumen Belum Lengkap</span>
-                                            <?php } ?>
 
-                                        </td>
                                         <td class="text-center">
                                             <?php
-                                            if ($adm['verifikasi'] != 1) {
+                                            if ($adm['verifikasi'] != 1 && $adm['verifikasi'] != 2) {
                                             ?>
                                                 <span class="badge bg-danger text-white">Belum Verifikasi</span>
+
+                                            <?php
+                                            } elseif ($adm['verifikasi'] != 1 && $adm['verifikasi'] != 0) {
+                                            ?>
+                                                <span class="badge bg-success text-white">Butuh diproses</span>
                                             <?php
                                             } else {
                                             ?>
-                                                <span class="badge bg-success text-white">Terverifikasi</span>
+                                                <span class="badge bg-success text-white">Sudah diverifikasi</span>
+
 
                                             <?php
                                             }

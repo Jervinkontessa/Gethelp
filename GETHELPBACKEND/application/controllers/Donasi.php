@@ -8,16 +8,17 @@ class Donasi extends CI_Controller
         parent::__construct();
 
         //kalo belum login
-        // is_logged_in();
-        $this->load->model('admin_model');
+        is_logged_in();
+        $this->load->model('users_model');
         $this->load->model('donasi_model');
         $this->load->helper('string');
     }
     public function index()
     {
         $data['title'] = "Data Campaign Yang Sedang Berjalan";
-        $data['user'] = $this->admin_model->getadminbyemail($this->session->userdata('email'));
+        $data['user'] = $this->users_model->getuserlogin($this->session->userdata('admin_data'));
         $data['donasi'] = $this->donasi_model->getdonasiygaktif();
+
         $data['donasihabis'] = $this->donasi_model->getdonasiyanghabismasanya();
         $data['donasiditolak'] = $this->donasi_model->getdonasiditolak();
         $data['category'] = $this->donasi_model->getcategory();
@@ -25,7 +26,10 @@ class Donasi extends CI_Controller
         $lama = 4;
         $where = "datediff(current_date(), tanggal_dibuat) >'" . $lama . "'";
 
-        if ($data['donasiditolak'] != '') {
+
+        if ($data['donasiditolak']) {
+
+            unlink(FCPATH . 'assets/img/donasithumb/' . $data['donasiditolak']['gambar']);
             $this->db->where($where);
             $this->db->where('status', 3);
             $this->db->delete('campaign');
@@ -41,7 +45,7 @@ class Donasi extends CI_Controller
             'min_length' => 'nama campaign terlalu pendek',
         ]);
         $this->form_validation->set_rules('tanggalberakhir', 'TanggalBerakhir', 'required');
-        $this->form_validation->set_rules('targetdonasi', ' TargetDonasi', 'required|trim|min_length[7]', [
+        $this->form_validation->set_rules('targetdonasi', ' TargetDonasi', 'required|trim|min_length[8]', [
 
             'min_length' => 'Target Donasi Minimal Rp.1.000.000'
         ]);
@@ -71,7 +75,7 @@ class Donasi extends CI_Controller
 
             if (!empty($uploadimage)) {
                 $config['allowed_types'] = 'gif|jpg|png|jpeg';
-                $config['max_size'] = '4048';
+                $config['max_size'] = '2048';
                 //kb
                 $config['file_name']  = $rand;
                 $config['upload_path'] = './assets/img/donasithumb/';
@@ -104,7 +108,7 @@ class Donasi extends CI_Controller
     public function selesai()
     {
         $data['title'] = "Data Campaign telah selesai";
-        $data['user'] = $this->admin_model->getadminbyemail($this->session->userdata('email'));
+        $data['user'] = $this->users_model->getuserlogin($this->session->userdata('admin_data'));
         $data['donasi'] = $this->donasi_model->getdonasiyangselesai();
 
 
@@ -128,7 +132,7 @@ class Donasi extends CI_Controller
         //cek jika ada gambar yang akan diupload
         if (!empty($uploadimage)) {
             $config['allowed_types'] = 'gif|jpg|png|jpeg';
-            $config['max_size'] = '4048';
+            $config['max_size'] = '1048';
             //kb
             $config['file_name']  = $rand;
             $config['upload_path'] = 'assets/img/buktitransfer/';
@@ -164,8 +168,8 @@ class Donasi extends CI_Controller
     public function edit($slug)
     {
         $data['title'] = "Edit Campaign";
-        $data['user'] = $this->admin_model->getadminbyemail($this->session->userdata('email'));
-        $data['donasi'] = $this->donasi_model->getdonasiygaktif($slug);
+        $data['user'] = $this->users_model->getuserlogin($this->session->userdata('admin_data'));
+        $data['donasi'] = $this->donasi_model->getdonasiygaktif($slug, '', '', '');
         $data['category'] = $this->donasi_model->getcategory();
 
         $this->form_validation->set_rules('namacampaign', 'NamaCampaign', 'required|trim|min_length[10]', [
@@ -203,7 +207,7 @@ class Donasi extends CI_Controller
             //cek jika ada gambar yang akan diupload
             if (!empty($uploadimage)) {
                 $config['allowed_types'] = 'gif|jpg|png|jpeg';
-                $config['max_size'] = '4048';
+                $config['max_size'] = '1048';
                 //kb
                 $config['file_name']  = $rand;
                 $config['upload_path'] = './assets/img/donasithumb/';
@@ -215,7 +219,7 @@ class Donasi extends CI_Controller
                     // jika tidak berhasil
 
                     $this->session->set_flashdata('error_msg', $this->upload->display_errors());
-                    redirect('donasi');
+                    redirect('donasi/edit');
                 } else {
                     $oldimage = $data['donasi']['gambar'];
 
@@ -247,7 +251,7 @@ class Donasi extends CI_Controller
     public function detail($slug)
     {
         $data['title'] = "Detail Campaign";
-        $data['user'] = $this->admin_model->getadminbyemail($this->session->userdata('email'));
+        $data['user'] = $this->users_model->getuserlogin($this->session->userdata('admin_data'));
         $data['donasi'] = $this->donasi_model->getdonasiygaktif($slug);
 
         $data['category'] = $this->donasi_model->getcategory();
@@ -319,7 +323,7 @@ class Donasi extends CI_Controller
     public function transaksi()
     {
         $data['title'] = "Data Transaksi Yang Berhasil";
-        $data['user'] = $this->admin_model->getadminbyemail($this->session->userdata('email'));
+        $data['user'] = $this->users_model->getuserlogin($this->session->userdata('admin_data'));
         $data['transaksi'] = $this->donasi_model->gettransaksi();
 
 
@@ -333,11 +337,8 @@ class Donasi extends CI_Controller
     public function pending()
     {
         $data['title'] = "Request Donasi";
-        $data['user'] = $this->admin_model->getadminbyemail($this->session->userdata('email'));
+        $data['user'] = $this->users_model->getuserlogin($this->session->userdata('admin_data'));
         $data['donasi'] = $this->donasi_model->getdonasipending();
-
-
-
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
@@ -349,7 +350,7 @@ class Donasi extends CI_Controller
     public function pendingdetail($slug)
     {
         $data['title'] = "Detail Pending Campaign";
-        $data['user'] = $this->admin_model->getadminbyemail($this->session->userdata('email'));
+        $data['user'] = $this->users_model->getuserlogin($this->session->userdata('admin_data'));
         $data['donasi'] = $this->donasi_model->getdonasipending($slug);
         $data['category'] = $this->donasi_model->getcategory();
 

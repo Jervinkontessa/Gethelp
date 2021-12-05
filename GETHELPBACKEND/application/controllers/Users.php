@@ -7,17 +7,17 @@ class Users extends CI_Controller
     {
         parent::__construct();
         //kalo belum login
-        // is_logged_in();
+        is_logged_in();
         $this->load->helper(array('url', 'download'));
         $this->load->model('users_model');
-        $this->load->model('admin_model');
     }
 
     public function index()
     {
         $data['title'] = "Daftar Users";
-        $data['user'] = $this->admin_model->getadminbyemail($this->session->userdata('email'));
+        $data['user'] = $this->users_model->getuserlogin($this->session->userdata('admin_data'));
         $data['users'] = $this->users_model->getuser();
+
 
 
         $this->load->view('templates/header', $data);
@@ -30,8 +30,10 @@ class Users extends CI_Controller
     public function detail($id)
     {
         $data['title'] = "Detail Users";
-        $data['user'] = $this->admin_model->getadminbyemail($this->session->userdata('email'));
-        $data['users'] = $this->users_model->getuser($id);
+        $data['user'] = $this->users_model->getuserlogin($this->session->userdata('admin_data'));
+        $data['users'] = $this->users_model->getuser($id, '');
+
+
 
 
 

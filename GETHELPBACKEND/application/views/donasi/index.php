@@ -22,7 +22,7 @@
             <?= form_error('cerita', '<div class="alert alert-danger" role="alert">', '</div>'); ?>
             <?= form_error('category', '<div class="alert alert-danger" role="alert">', '</div>'); ?>
 
-            <?= $this->session->flashdata('error_msg'); ?>
+
 
 
             <?= $this->session->flashdata('message'); ?>

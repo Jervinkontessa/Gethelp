@@ -1,0 +1,350 @@
+.popular_causes_area .single_cause .thumb img {
+	width: 100%;
+	-webkit-transform: scale(1);
+	-moz-transform: scale(1);
+	-ms-transform: scale(1);
+	transform: scale(1);
+	-webkit-transition: 0.3s;
+	-moz-transition: 0.3s;
+	-o-transition: 0.3s;
+	transition: 0.3s;
+}
+
+/* line 103, ../../Arafath/CL/january 2020/242. charity/HTML/scss/_causes.scss */
+
+.popular_causes_area .single_cause .causes_content {
+	-webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+	-moz-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+	padding: 10px 30px 34px 30px;
+	position: relative;
+	-webkit-border-radius: 0 0px 7px 7px;
+	-moz-border-radius: 0 0px 7px 7px;
+	border-radius: 0 0px 7px 7px;
+	height: 250px;
+}
+
+.popular_causes_area.cause_details
+	.single_cause
+	.causes_content
+	.cause-progress {
+	margin: 0 10px 15px;
+	border: 1px solid #119c3b;
+	border-radius: 3px;
+}
+
+.popular_causes_area.cause_details
+	.single_cause
+	.causes_content
+	.cause-progress
+	.progress-bar {
+	background: #119c3b;
+	box-shadow: none;
+}
+
+/* line 138, ../../Arafath/CL/january 2020/242. charity/HTML/scss/_causes.scss */
+
+.popular_causes_area .single_cause .causes_content .balance {
+	padding-bottom: 15px;
+	margin-bottom: 15px;
+	border-bottom: 1px solid #f2f2f2;
+}
+
+/* line 141, ../../Arafath/CL/january 2020/242. charity/HTML/scss/_causes.scss */
+
+.popular_causes_area .single_cause .causes_content .balance span {
+	font-size: 12px;
+	color: #000;
+	font-weight: 600;
+}
+
+.popular_causes_area .single_cause .causes_content .balance span.donatur {
+	font-size: 14px;
+	color: #222222;
+	font-weight: 800;
+}
+
+.popular_causes_area .single_cause .causes_content span {
+	font-size: 13px;
+}
+
+.popular_causes_area .single_cause .causes_content a h4 {
+	color: #000 !important;
+	font-size: 16px;
+	margin-bottom: 20px;
+	font-weight: bold;
+}
+
+/* line 153, ../../Arafath/CL/january 2020/242. charity/HTML/scss/_causes.scss */
+
+.popular_causes_area .single_cause .causes_content a {
+	margin-bottom: 2px;
+	color: #fff;
+	width: 100%;
+}
+
+/* line 160, ../../Arafath/CL/january 2020/242. charity/HTML/scss/_causes.scss */
+
+.popular_causes_area .single_cause:hover .thumb img {
+	-webkit-transform: scale(1.1);
+	-moz-transform: scale(1.1);
+	-ms-transform: scale(1.1);
+	transform: scale(1.1);
+}
+
+.section_padding {
+	padding-top: 80px;
+	padding-bottom: 10px;
+}
+
+@media (max-width: 767px) {
+	/* line 298, ../../Arafath/CL/january 2020/242. charity/HTML/scss/_theme-default.scss */
+	.section_padding {
+		padding-top: 80px;
+		padding-bottom: 10px;
+	}
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+	/* line 298, ../../Arafath/CL/january 2020/242. charity/HTML/scss/_theme-default.scss */
+	.section_padding {
+		padding-top: 80px;
+		padding-bottom: 10px;
+	}
+}
+
+.section_title span {
+	font-size: 20px;
+}
+
+.section_title span a {
+	font-size: 16px;
+	text-decoration: none;
+	color: #2b7ed6;
+}
+
+.section_title span a:hover {
+	color: #007bff;
+}
+
+/* line 9, ../../Arafath/CL/january 2020/242. charity/HTML/scss/_section_title.scss */
+
+.section_title span {
+	position: relative;
+	display: inline-block;
+	z-index: 2;
+}
+
+@media (max-width: 767px) {
+	/* line 2, ../../Arafath/CL/january 2020/242. charity/HTML/scss/_section_title.scss */
+	.section_title span {
+		font-size: 15px;
+		line-height: 15px;
+	}
+	.section_title span a {
+		font-size: 15px;
+		line-height: 15px;
+	}
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+	/* line 2, ../../Arafath/CL/january 2020/242. charity/HTML/scss/_section_title.scss */
+	.section_title span {
+		font-size: 16px;
+		line-height: 15px;
+	}
+	.section_title span a {
+		font-size: 15px;
+		line-height: 15px;
+	}
+}
+
+.section-gap {
+	padding: 30px 0;
+}
+
+.site-section {
+	padding: 1.5em 0;
+}
+
+.feature-29012 .number {
+	-webkit-box-flex: 0;
+	-ms-flex: 0 0 80px;
+	flex: 0 0 80px;
+	height: 80px;
+	border: 2px solid #007bff;
+	position: relative;
+	display: block;
+	font-size: 1.5rem;
+	color: #000;
+}
+
+.feature-29012 .number > span {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+
+.feature-29012 h3 {
+	font-size: 20px;
+	color: #000;
+}
+
+.feature-29012 p {
+	font-size: 1rem;
+	color: #000;
+}
+
+.img-donasi-slider {
+	width: 100%;
+	height: auto;
+}
+
+/* ===================================== Footer CSS ================================== */
+
+.footer {
+	margin-top: 90px;
+	padding-top: 20px;
+	padding-bottom: 15px;
+	background-color: #007bff;
+	color: #fff;
+}
+
+@media screen and (max-width: 940px) {
+	.footer {
+		padding: 30px 10px;
+	}
+}
+
+.footer h2 {
+	font-size: 20px;
+	margin-top: 10px;
+	color: #fff;
+	margin-bottom: 15px;
+	font-weight: 700;
+}
+
+.footer p {
+	font-size: 16px;
+}
+
+.footer .link-list li {
+	padding: 5px;
+	font-size: 16px;
+}
+
+.footer .link-list li a {
+	text-decoration: none;
+	color: #fff;
+}
+
+.footer .link-list li i {
+	float: right;
+}
+
+.footer .map-img {
+	font-weight: 600;
+	font-size: 17px;
+	padding-left: 20px;
+}
+
+.footer address {
+	font-weight: 300;
+}
+
+.footer address a {
+	color: #fff;
+	font-size: 22px;
+	text-decoration: none;
+}
+
+.copy {
+	padding: 10px;
+	background: #007bff;
+	color: #fff;
+}
+
+.copy p {
+	color: #fff;
+}
+
+.footer span {
+	float: left;
+}
+
+.footer span i {
+	cursor: pointer;
+	margin-right: 20px;
+}
+
+.nav-pills .nav-link.nav-about.active,
+.nav-pills .show > .nav-link.nav-about {
+	color: #fff !important;
+	background-color: #007bff;
+}
+
+.badge {
+	display: inline-block;
+	padding: 5px;
+	font-size: 75%;
+	font-weight: 700;
+	line-height: 1;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: baseline;
+	border-radius: 0.25rem;
+	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+		border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.badge.badge-info.kat-sosial {
+	background-color: #ff6600;
+}
+
+.badge.badge-info.kat-kesehatan {
+	background-color: #ff0000;
+}
+
+.pull-right {
+	margin-left: 0.3em;
+	float: right;
+}
+
+.form-control.control-lg {
+	background-color: #007bff;
+	color: #fff !important;
+}
+
+.form-control.control-lg option {
+	background-color: #fff;
+	color: #000 !important;
+}
+
+.page-item .page-link {
+	background: transparent;
+	border-radius: 0.35rem;
+	border: none;
+	padding: 0.75rem 1rem;
+	font-weight: 700;
+	font-size: 1rem;
+	color: #454545;
+}
+
+.page-item.disabled .page-link {
+	background: transparent;
+}
+
+.page-item.active .page-link {
+	z-index: 3;
+	color: #ffffff;
+	background: var(--primary);
+	border-color: var(--primary);
+}
+
+.section-gap-bottom {
+	padding-top: 70px;
+	padding-bottom: 20px;
+}

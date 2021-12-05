@@ -57,19 +57,6 @@
                                         <td><?= "Rp " . number_format($d['donasi_terkumpul'], 0, ',', '.'); ?></td>
                                         <td><?= "Rp " . number_format($d['target_donasi'], 0, ',', '.'); ?></td>
                                         <td class="text-center">
-                                            <?php
-                                            if ($d['bukti_transfer'] != '') {
-                                            ?>
-                                                <img src="<?= base_url('assets/img/buktitransfer/') . $d['bukti_transfer']; ?>" width="80px;">
-                                            <?php
-                                            } else {
-                                            ?>
-                                                <span class="badge bg-warning text-white">Belum upload bukti</span>
-                                            <?php
-                                            }
-                                            ?>
-                                        </td>
-                                        <td class="text-center">
                                             <a href="" class="btn btn-primary btn-upload" style="font-size: 15px;" id="uploadbuktitransfer" data-toggle="modal" data-target="#uploadbuktimodal" data-slug="<?= $d['slug']; ?>">Upload</a>
                                         </td>
                                     </tr>

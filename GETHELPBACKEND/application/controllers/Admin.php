@@ -23,14 +23,22 @@ class Admin extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        is_logged_in();
         $this->load->library('form_validation');
-        $this->load->model('admin_model');
+
+        $this->load->model('users_model');
+        $this->load->model('donasi_model');
     }
 
     public function index()
     {
         $data['title'] = "Dashboard";
-        $data['user'] = $this->admin_model->getadminbyemail($this->session->userdata('email'));
+        $data['user'] = $this->users_model->getuserlogin($this->session->userdata('admin_data'));
+        $data['totaluser'] = $this->users_model->totaluser();
+        $data['pending'] = $this->donasi_model->countpending();
+        $data['donasiselesai'] = $this->donasi_model->countcampaignselesai();
+
+
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
@@ -41,7 +49,7 @@ class Admin extends CI_Controller
     public function profile()
     {
         $data['title'] = "My Profile";
-        $data['user'] = $this->admin_model->getadminbyemail($this->session->userdata('email'));
+        $data['user'] = $this->users_model->getuserlogin($this->session->userdata('admin_data'));
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
@@ -54,7 +62,7 @@ class Admin extends CI_Controller
     public function edit()
     {
         $data['title'] = "Edit Profile";
-        $data['user'] = $this->admin_model->getadminbyemail($this->session->userdata('email'));
+        $data['user'] = $this->users_model->getuserlogin($this->session->userdata('admin_data'));
 
         $this->form_validation->set_rules('name', 'fullname', 'required|trim');
 
@@ -101,17 +109,17 @@ class Admin extends CI_Controller
             } else {
                 $newimage = $image;
             }
-            $this->admin_model->editprofile($newimage, $name, $email);
+            $this->users_model->editprofile($newimage, $name, $email);
 
             // $this->db->set('nama', $name);
             // $this->db->where('email', $email);
             // $this->db->update('admin');
             if ($name == $data['user']['nama'] && $image == $data['user']['image']) {
-                redirect('user');
+                redirect('admin');
             } else {
                 $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
         Your Profile has been updated</div>');
-                redirect('user');
+                redirect('admin');
             }
         }
     }
@@ -120,7 +128,7 @@ class Admin extends CI_Controller
     public function changepassword()
     {
         $data['title'] = "Change Password";
-        $data['user'] = $this->admin_model->getadminbyemail($this->session->userdata('email'));
+        $data['user'] = $this->users_model->getuserlogin($this->session->userdata('admin_data'));
 
 
         $this->form_validation->set_rules('current_password', 'Current Password', 'required|trim');
@@ -144,12 +152,12 @@ class Admin extends CI_Controller
 
                 $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
                 Wrong old password</div>');
-                redirect('user/changepassword');
+                redirect('admin/changepassword');
             } else {
                 if ($currentpass == $newpass) {
                     $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
                     New password cannot same with your current password</div>');
-                    redirect('user/changepassword');
+                    redirect('admin/changepassword');
                 } else {
                     // password baru sdh ok
                     $password_hash = password_hash($newpass, PASSWORD_DEFAULT);
@@ -157,12 +165,12 @@ class Admin extends CI_Controller
                     // $this->db->set('password', $password_hash);
                     // $this->db->where('email', $this->session->userdata('email'));
                     // $this->db->update('user');
-                    $this->admin_model->editprofile($password_hash);
+                    $this->users_model->changepassword($password_hash);
 
 
                     $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
                     Your Password Changed</div>');
-                    redirect('user/changepassword');
+                    redirect('admin/changepassword');
                 }
             }
         }

@@ -28,7 +28,6 @@
             <?= $this->session->flashdata('message'); ?>
 
 
-            <a href="<?= base_url('donasi/tambahdonasi') ?>" class="btn btn-primary mb-3" data-toggle="modal" data-target="#adddonasimodal">Add Donasi</a>
 
             <!-- DataTales  -->
             <div class="card shadow mb-4">

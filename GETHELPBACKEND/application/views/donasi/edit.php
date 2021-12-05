@@ -12,6 +12,8 @@
         </ol>
     </nav>
 
+    <?= $this->session->flashdata('error_msg'); ?>
+
     <div class="row">
         <div class="col-md-12">
 
@@ -57,6 +59,7 @@
                                     <input type="hidden" name="old_image" value="<?= $donasi['gambar'] ?>">
                                     <input type="file" class="custom-file-input" id="image" name="image">
                                     <label class="custom-file-label" for="image">Choose file</label>
+
                                 </div>
                             </div>
                         </div>
