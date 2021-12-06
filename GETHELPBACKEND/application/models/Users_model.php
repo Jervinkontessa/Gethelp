@@ -60,16 +60,13 @@ class Users_model extends CI_Model
         return $query->row_array();
     }
 
-    public function gettransaksi($id = '')
+    public function gettransaksi($nama = '')
     {
-
-
-        $this->db->select('campaign.nama_campaign, users.nama, gross_amount, transaction_time, status_code, payment_type, bank');
-        $this->db->join('users', 'transaksi_midtrans.users_id = users.id');
-        $this->db->join('campaign', 'campaign.campaign_id = transaksi_midtrans.campaign_id');
-        $this->db->where('transaksi_midtrans.users_id', $id);
+        $this->db->select('campaign.nama_campaign, transaksi_midtrans.campaign_id, gross_amount, transaction_time, status_code, payment_type');
+        $this->db->join('campaign', 'transaksi_midtrans.campaign_id = campaign.campaign_id');
+        $this->db->like('transaksi_midtrans.nama', $nama);
         $this->db->where('transaksi_midtrans.status_code', 200);
-        $this->db->order_by('users.nama', 'DESC');
+        $this->db->order_by('transaksi_midtrans.transaction_time', 'DESC');
         $this->db->limit(5);
 
         $query = $this->db->get('transaksi_midtrans');

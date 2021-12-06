@@ -18,7 +18,8 @@ class Galangdana_model extends CI_Model
             'tanggal_berakhir' => $tglberakhir,
             'status' => $status,
             'cerita' => $cerita,
-            'target_donasi' => $targetdonasi
+            'target_donasi' => $targetdonasi,
+            'jumlah_dicairkan' => '0'
         ];
         $this->db->insert('campaign', $data);
     }

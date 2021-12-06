@@ -13,9 +13,15 @@
     <!-- Jquery Library File-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Custom CSS File-->
-    <?php if ($css != 'css2' && $css != 'summernote') { ?>
+    <?php if ($css != 'css2' && $css != 'summernote' && $css != 'donate') { ?>
         <link rel="stylesheet" href="<?= base_url('assets/css/uidev1.min.css') ?>">
         <link rel="stylesheet" href="<?= base_url('assets/css/uidev2.min.css') ?>">
+    <?php } elseif ($css == 'donate') { ?>
+        <link rel="stylesheet" href="<?= base_url('assets/css/uidev1.min.css') ?>">
+        <link rel="stylesheet" href="<?= base_url('assets/css/uidev2.min.css') ?>">
+        <link rel="stylesheet" href="<?= base_url('assets/css/style_frontend2.css') ?>">
+        <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-85myPC57TxX7q4qH"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <?php } elseif ($css == 'summernote') {  ?>
         <link rel="stylesheet" href="<?= base_url('assets/summernote/')  ?>summernote-bs4.css">
         <link rel="stylesheet" href="https://unpkg.com/bootstrap-datepicker@1.9.0/dist/css/bootstrap-datepicker3.min.css">

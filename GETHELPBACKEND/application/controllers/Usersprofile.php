@@ -35,9 +35,12 @@ class Usersprofile extends CI_Controller
 
         $data['title'] = 'Dashboard ~ GetHelp';
         $data['user'] = $this->users_model->getuserlogin($this->session->userdata('user_data'));
+        $nama = $data['user']['nama'];
         $id = $data['user']['id'];
         $data['biodata'] = $this->users_model->getbiodata($id);
-        $data['donasiuser'] = $this->users_model->gettransaksi($id);
+        $data['donasiuser'] = $this->users_model->gettransaksi($nama);
+
+
         $data['campaignuser'] = $this->users_model->getcampaign($id, '');
 
 

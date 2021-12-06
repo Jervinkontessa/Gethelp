@@ -85,7 +85,7 @@
                                 <div class="tab-pane fade mb-50" id="update" role="tabpanel" aria-labelledby="update-tab">
                                     <div style="margin-top: 20px;">
                                         <h6>Jumlah yang telah dicairkan :
-                                            <b><?= "Rp " . number_format($detail['jumlah_dicairkan'], 0, ',', '.'); ?></b>
+                                            <b><?= "Rp " . number_format($detail['jumlah_dicairkan'], 0, ',', '.');  ?></b>
                                         </h6>
                                     </div>
 
@@ -141,7 +141,7 @@
                                     </ul>
                                     <div class="clearfix"></div>
                                 </div>
-                                <a href="donate.html" class="btn btn-primary btn-block">Donasi
+                                <a href="<?= base_url('donate/') . $detail['slug'] ?>" class="btn btn-primary btn-block">Donasi
                                     <i class="far fa-handshake ml-1" aria-hidden="true" style="font-size:19px;"></i>
                                 </a>
                                 <button type="button" class="btn btn-default btn-block" data-toggle="modal" data-target="#socialMediaModal" style="border:1px solid #000;background:#fff;">Bagikan
@@ -302,7 +302,7 @@
                             <button type="button" class="btn btn-default" data-toggle="modal" data-target="#socialMediaModal" style="width: 40%;border:1px solid #000;background:#fff;">Bagikan
                                 <i class="fa fa-share ml-1" aria-hidden="true"></i>
                             </button>
-                            <a href="<?= base_url('donate?f=') . $detail['campaign_id'] ?>" class="btn btn-primary" style="width: 58%;">Donasi
+                            <a href="<?= base_url('donate/') . $detail['slug'] ?>" class="btn btn-primary" style="width: 58%;">Donasi
                                 <i class="far fa-handshake ml-1" aria-hidden="true" style="font-size:19px;"></i>
                             </a>
                         </div>

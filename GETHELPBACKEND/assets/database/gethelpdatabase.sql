@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 05, 2021 at 10:43 AM
+-- Generation Time: Dec 06, 2021 at 08:21 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
@@ -47,7 +47,7 @@ CREATE TABLE `biodata` (
 --
 
 INSERT INTO `biodata` (`id`, `users_id`, `nama_lengkap`, `alamat`, `phone`, `noktp`, `ktp`, `selfie_ktp`, `no_rekening`, `nama_bank`, `nama_pemilik_rekening`) VALUES
-(1, 1, 'Jervin descrates kontessa', 'Jl. Monginsidi baru no 7', '089603410151', '736482922942928', '1ktp.jpeg', '1selfie.jpeg', '9388484848942', 'BCA', 'jervin descrates kontessa'),
+(1, 3, 'Jervin descrates kontessa', 'Jl. Monginsidi baru no 7', '089603410151', '736482922942928', '1ktp.jpeg', '1selfie.jpeg', '9388484848942', 'BCA', 'jervin descrates kontessa'),
 (2, 2, 'Naruto Uzumaki', 'konoha', '089603410152', '736482922942921', '2ktp.jpeg', '2selfie.jpeg', '9388484848946', 'BRI', 'jervin descrates kontessa');
 
 -- --------------------------------------------------------
@@ -188,14 +188,11 @@ INSERT INTO `report` (`id`, `campaign_id`, `nama`, `email`, `nomorhp`, `kategori
 CREATE TABLE `transaksi_midtrans` (
   `order_id` varchar(20) NOT NULL,
   `campaign_id` int(11) NOT NULL DEFAULT 0,
-  `users_id` int(5) DEFAULT NULL,
   `nama` text DEFAULT NULL,
   `gross_amount` int(128) NOT NULL,
   `payment_type` varchar(20) NOT NULL,
   `transaction_time` varchar(20) NOT NULL,
-  `bank` varchar(10) NOT NULL,
   `va_number` varchar(30) NOT NULL,
-  `pdf_url` text NOT NULL,
   `status_code` char(3) NOT NULL,
   `doa` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -204,9 +201,9 @@ CREATE TABLE `transaksi_midtrans` (
 -- Dumping data for table `transaksi_midtrans`
 --
 
-INSERT INTO `transaksi_midtrans` (`order_id`, `campaign_id`, `users_id`, `nama`, `gross_amount`, `payment_type`, `transaction_time`, `bank`, `va_number`, `pdf_url`, `status_code`, `doa`) VALUES
-('22222222', 1, 3, 'Jervin Kontessa', 500000, 'bank', '2021-11-30 08:09:32', 'bca', '193040203', '', '200', 'Semoga cepat terkumpul dananya'),
-('22222229', 1, 3, 'Jervin Kontessa\r\n', 200000, 'bank', '2021-11-30 09:09:40', 'bca', '029039291', '', '200', 'Cepat sembuh');
+INSERT INTO `transaksi_midtrans` (`order_id`, `campaign_id`, `nama`, `gross_amount`, `payment_type`, `transaction_time`, `va_number`, `status_code`, `doa`) VALUES
+('22222222', 1, 'Jervin Kontessa', 500000, 'bank', '2021-11-30 08:09:32', '193040203', '200', 'Semoga cepat terkumpul dananya'),
+('22222229', 1, 'Jervin Kontessa\r\n', 200000, 'bank', '2021-11-30 09:09:40', '029039291', '200', 'Cepat sembuh');
 
 --
 -- Triggers `transaksi_midtrans`
@@ -266,8 +263,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `nama`, `image`, `email`, `password`, `tanggal_dibuat`, `terakhir_login`, `status`, `verifikasi`, `id_jenisakun`, `role`) VALUES
 (1, 'GetHelp', 'gethelp.jpg', 'gethelp.startup@gmail.com', '$2y$10$/9xWw5sVTIhjEzlDZvb/JeWuh18lxPivhlHxHHFZzIhR6Ao7qh23e', '2021-12-04', '2021-12-04', 1, 1, 1, 'admin'),
-(2, 'Naruto Uzumaki', 'default.png', 'jervin.uzumaki@gmail.com', '$2y$10$hluSMJQLZeIT2WePocqfHux/h7zCC0s1Ww9F0Nzny8Ny00T7Gjx42', '2021-12-04', '2021-12-04', 1, 1, 1, 'user'),
-(3, 'Jervin Kontessa', 'default.png', 'jervindescrates@gmail.com', '', '2021-12-04', '2021-12-05', 1, 0, 1, 'user');
+(2, 'Naruto Uzumaki', 'default.png', 'jervin.uzumaki@gmail.com', '$2y$10$hluSMJQLZeIT2WePocqfHux/h7zCC0s1Ww9F0Nzny8Ny00T7Gjx42', '2021-12-04', '2021-12-06', 1, 1, 1, 'user'),
+(3, 'Jervin Kontessa', 'default.png', 'jervindescrates@gmail.com', '', '2021-12-04', '2021-12-05', 1, 1, 1, 'user');
 
 -- --------------------------------------------------------
 

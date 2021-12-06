@@ -123,8 +123,7 @@ class Campaign_model extends CI_Model
 
     public function getdonatur($id, $limit)
     {
-        $this->db->select('gross_amount,transaction_time,users.nama As oleh,doa');
-        $this->db->join('users', 'transaksi_midtrans.users_id = users.id');
+        $this->db->select('gross_amount,transaction_time,doa');
         $this->db->where('campaign_id', $id);
         $this->db->where('status_code', 200);
         $this->db->limit($limit);
@@ -150,8 +149,7 @@ class Campaign_model extends CI_Model
 
     public function getdoahome($limit)
     {
-        $this->db->select('gross_amount,transaction_time,users.nama As oleh,doa, nama_campaign, slug');
-        $this->db->join('users', 'transaksi_midtrans.users_id = users.id');
+        $this->db->select('gross_amount,transaction_time,doa, nama_campaign, slug');
         $this->db->join('campaign', 'transaksi_midtrans.campaign_id = campaign.campaign_id');
         $this->db->where('status_code', 200);
         $this->db->limit($limit);

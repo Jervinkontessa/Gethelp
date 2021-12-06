@@ -151,6 +151,7 @@ class Campaign extends CI_Controller
         $data['user'] = $this->users_model->getuserlogin($this->session->userdata('user_data'));
 
         $data['detail'] = $this->campaign_model->detailcampaign($slug);
+
         $data['title'] =  $data['detail']['nama_campaign'];
         $data['update'] = $this->campaign_model->getcampaignupdatebyid($data['detail']['campaign_id']);
         $data['donatur'] = $this->campaign_model->getdonatur($data['detail']['campaign_id'], 5);

@@ -24,7 +24,9 @@ $route['form-galang-dana'] = 'galangdana/mulai';
 //userprofile
 $route['user'] = 'usersprofile/index';
 
-
+//snap
+$route['donate/(:any)'] = 'vtweb/index/$1';
+$route['thankspage'] = 'vtweb/finish';
 
 //controller campaign
 $route['campaign'] = 'campaign/index';
