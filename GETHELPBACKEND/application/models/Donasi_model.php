@@ -9,43 +9,21 @@ class Donasi_model extends CI_Model
     // INNER JOIN users ON campaign.users_id = users.id
     // WHERE campaign.status = 1 AND approve = 1
     // GROUP BY campaign.id, users.id
+    public function getalldonasi($slug)
+    {
+        $this->db->select('*');
 
-    public function getdonasiygaktif($slug = '', $category = '', $search = '', $limit = '')
+
+        $this->db->join('category', 'campaign.category_id = category.id');
+        $this->db->where('slug', $slug);
+        $query = $this->db->get('campaign');
+        return $query->row_array();
+    }
+    public function getdonasiygaktif($limit = '')
     {
 
-        if ($slug != '') {
-            $this->db->select('campaign.campaign_id, category.nama As cnama,users.nama,campaign.nama_campaign,slug,campaign.users_id,target_donasi, campaign.tanggal_dibuat,tanggal_berakhir,datediff(tanggal_berakhir, current_date()) as hari_tersisa, donasi_terkumpul, campaign.gambar, campaign.cerita');
-
-            $this->db->join('users', 'campaign.users_id = users.id');
-            $this->db->join('category', 'campaign.category_id = category.id');
-            $where = '1';
-            $this->db->where('campaign.status', $where);
-            $this->db->where('slug', $slug);
-            $query = $this->db->get('campaign');
-            return $query->row_array();
-        } elseif ($category != '') {
-            $this->db->select('campaign.campaign_id, category.nama As cnama,users.nama,campaign.nama_campaign,slug,campaign.users_id,target_donasi, campaign.tanggal_dibuat,tanggal_berakhir,datediff(tanggal_berakhir, current_date()) as hari_tersisa, donasi_terkumpul, campaign.gambar, campaign.cerita');
-
-            $this->db->join('users', 'campaign.users_id = users.id');
-            $this->db->join('category', 'campaign.category_id = category.id');
-            $where = '1';
-            $this->db->where('campaign.status', $where);
-            $this->db->where('category.nama', $category);
-            $query = $this->db->get('campaign');
-            return $query->result_array();
-        } elseif ($search != '') {
-            $this->db->select('campaign.campaign_id, category.nama As cnama,users.nama,campaign.nama_campaign,slug,campaign.users_id,target_donasi, campaign.tanggal_dibuat,tanggal_berakhir,datediff(tanggal_berakhir, current_date()) as hari_tersisa, donasi_terkumpul, campaign.gambar, campaign.cerita');
-
-            $this->db->join('users', 'campaign.users_id = users.id');
-            $this->db->join('category', 'campaign.category_id = category.id');
-            $where = '1';
-            $this->db->where('campaign.status', $where);
-            $this->db->like('campaign.nama_campaign', $search);
-            $this->db->or_like('cnama', $search);
-            $query = $this->db->get('campaign');
-            return $query->result_array();
-        } elseif ($limit != '') {
-            $this->db->select('campaign.campaign_id, category.nama As cnama,users.nama,campaign.nama_campaign,slug,campaign.users_id,target_donasi, campaign.tanggal_dibuat,tanggal_berakhir,datediff(tanggal_berakhir, current_date()) as hari_tersisa, donasi_terkumpul, campaign.gambar, campaign.cerita');
+        if ($limit != '') {
+            $this->db->select('campaign.campaign_id, category.nama As cnama,users.nama,campaign.nama_campaign,slug,campaign.users_id,target_donasi, campaign.tanggal_dibuat,tanggal_berakhir,datediff(tanggal_berakhir, current_date()) as hari_tersisa, donasi_terkumpul, campaign.gambar, campaign.cerita, campaign.jumlah_dicairkan');
 
             $this->db->join('users', 'campaign.users_id = users.id');
             $this->db->join('category', 'campaign.category_id = category.id');
@@ -55,7 +33,7 @@ class Donasi_model extends CI_Model
             $query = $this->db->get('campaign');
             return $query->result_array();
         } else {
-            $this->db->select('campaign.campaign_id, category.nama As cnama,users.nama,campaign.nama_campaign,slug,campaign.users_id,target_donasi, campaign.tanggal_dibuat,tanggal_berakhir,datediff(tanggal_berakhir, current_date()) as hari_tersisa, donasi_terkumpul, campaign.gambar, campaign.cerita');
+            $this->db->select('campaign.campaign_id, category.nama As cnama,users.nama,campaign.nama_campaign,slug,campaign.users_id,target_donasi, campaign.tanggal_dibuat,tanggal_berakhir,datediff(tanggal_berakhir, current_date()) as hari_tersisa, donasi_terkumpul, campaign.gambar, campaign.cerita, campaign.jumlah_dicairkan');
             $this->db->join('users', 'campaign.users_id = users.id');
             $this->db->join('category', 'campaign.category_id = category.id');
             $where = '1';
@@ -194,7 +172,7 @@ class Donasi_model extends CI_Model
         $this->db->insert('campaign', $data);
     }
 
-    public function updatecampaign($slug, $namacampaign, $tanggalberakhir, $targetdonasi, $cerita, $gambar, $category_id, $status)
+    public function updatecampaign($slug, $namacampaign, $tanggalberakhir, $targetdonasi, $cerita, $gambar, $category_id, $status, $jumlahdicairkan)
     {
         //users_id 1 nantinya adalah dari gethelp
         $data = [
@@ -205,7 +183,8 @@ class Donasi_model extends CI_Model
             'status' => $status,
             'target_donasi' => $targetdonasi,
             'cerita' => $cerita,
-            'gambar' => $gambar
+            'gambar' => $gambar,
+            'jumlah_dicairkan' => $jumlahdicairkan
         ];
         $this->db->where('campaign_id', $this->input->post('id'));
         $this->db->update('campaign', $data);
@@ -230,34 +209,21 @@ class Donasi_model extends CI_Model
     }
 
     // data transaksi midtrans mulai dari sini
-    public function gettransaksi($userid = '')
+    public function gettransaksi()
     {
-        $status = 200;
-        if ($userid != '') {
-            $this->db->select('order_id,campaign.nama_campaign,campaign.campaign_id, users.email,users.id,users.nama AS username, gross_amount, payment_type, transaction_time AS tanggal_transaksi, bank, va_number, pdf_url, status_code');
 
-            $this->db->join('users', 'ON transaksi_midtrans.users_id = users.id');
-            $this->db->join('campaign ', 'ON campaign.campaign_id = transaksi_midtrans.campaign_id');
-            $where = '1';
-            $this->db->where('users_id', $userid);
-            $this->db->where('status_code', $status);
-            $this->db->order_by("transaction_time", "desc");
-            $query = $this->db->get('transaksi_midtrans');
-            return $query->row_array();
-        } else {
-            $this->db->select('order_id,campaign.nama_campaign,campaign.campaign_id, users.email,users.id,users.nama AS username, gross_amount, payment_type, transaction_time AS tanggal_transaksi, bank, va_number, pdf_url, status_code');
+        $this->db->select('order_id,campaign.nama_campaign,campaign.campaign_id,nama As username, gross_amount, payment_type, transaction_time AS tanggal_transaksi, va_number, status_code');
 
-            $this->db->join('users', 'ON transaksi_midtrans.users_id = users.id');
-            $this->db->join('campaign ', 'ON campaign.campaign_id = transaksi_midtrans.campaign_id');
-            $this->db->where('status_code', $status);
-            $this->db->order_by("transaction_time", "desc");
-            $query = $this->db->get('transaksi_midtrans');
-            return $query->result_array();
-        }
+
+        $this->db->join('campaign ', 'ON campaign.campaign_id = transaksi_midtrans.campaign_id');
+        $this->db->where('status_code', 200);
+        $this->db->order_by("transaction_time", "desc");
+        $query = $this->db->get('transaksi_midtrans');
+        return $query->result_array();
     }
 
 
-    public function countpending()
+    public function countpendingcampaign()
     {
         $this->db->select(' COUNT(*) AS total');
         $this->db->where('status', 2);
@@ -271,5 +237,23 @@ class Donasi_model extends CI_Model
         $this->db->where('status', 0);
         $query = $this->db->get('campaign');
         return $query->result_array();
+    }
+    public function countreport()
+    {
+        $this->db->select(' COUNT(*) AS total');
+        $query = $this->db->get('report');
+        return $query->row_array();
+    }
+
+
+    public function insertkabar($cid, $keterangan, $datenow, $kabarimg)
+    {
+        $data = [
+            'campaign_id' => $cid,
+            'gambar' => $kabarimg,
+            'keterangan' => $keterangan,
+            'tanggal' => $datenow
+        ];
+        $this->db->insert('update_campaign', $data);
     }
 }

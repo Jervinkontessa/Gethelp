@@ -28,8 +28,8 @@
             <?= $this->session->flashdata('message'); ?>
 
 
-            <a href="<?= base_url('donasi/tambahdonasi') ?>" class="btn btn-primary mb-3" data-toggle="modal" data-target="#adddonasimodal">Add Donasi</a>
-
+            <a href="" class="btn btn-primary mb-3" data-toggle="modal" data-target="#adddonasimodal">Add Donasi</a>
+            <a href=""></a>
             <!-- DataTales  -->
             <div class="card shadow mb-4">
 
@@ -45,6 +45,7 @@
                                     <th>Tanggal Berakhir</th>
                                     <th>Donasi Terkumpul</th>
                                     <th>Target Dana</th>
+                                    <th>Jumlah dicairkan</th>
                                     <th>Hari Tersisa</th>
                                     <th>Action</th>
                                 </tr>
@@ -62,12 +63,12 @@
                                         <td><?= "Rp " . number_format($d['donasi_terkumpul'], 0, ',', '.'); ?></td>
 
                                         <td><?= "Rp " . number_format($d['target_donasi'], 0, ',', '.'); ?></td>
+                                        <td><?= "Rp " . number_format($d['jumlah_dicairkan'], 0, ',', '.'); ?></td>
                                         <td><?= $d['hari_tersisa'] ?></td>
                                         <td class="text-center">
                                             <a href="<?= base_url('donasi/edit/') . $d['slug'] ?>" class="text-warning"><i class="fas fa-edit"></i></a>
-                                            <a href="<?= base_url('donasi/delete/') . $d['slug'] ?>" class="text-danger"><i class="fas fa-trash-alt"></i></a>
-                                            <a href="<?= base_url('donasi/detail/') . $d['slug'] ?>" class="text-info"><i class="fas fa-eye"></i></a>
-
+                                            <a href="<?= base_url('donasi/delete/') . $d['slug'] ?>" class="text-danger" onClick="return confirm('anda yakin mau hapus campaign ini?')"><i class="fas fa-trash-alt"></i></a>
+                                            <a href="<?= base_url('donasi/update/') . $d['slug'] ?>" class="text-darken"><i class="fas fa-plus"></i></a>
                                         </td>
                                     </tr>
                                     <?php $i++; ?>
@@ -88,9 +89,9 @@
 <!-- End of Main Content -->
 
 <!-- Modal -->
-<div class="modal fade" id="adddonasimodal" tabindex="-1" aria-labelledby="adddonasimodalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
+<div class="modal fade bd-example-modal-lg" id="adddonasimodal" tabindex="-1" aria-labelledby="adddonasimodalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content modal-lg">
             <div class="modal-header bg-primary">
                 <h4 class="modal-title text-white font-weight-bolder" id="adddonasimodalLabel">Tambah Campaign</h4>
                 <button type="button" class="text-white close" data-dismiss="modal" aria-label="Close">
@@ -121,7 +122,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="image">Upload Bukti Berupa Gambar, Max Ukuran Gambar 4 MB</label>
+                        <label for="image">Upload Bukti Berupa Gambar, Max Ukuran Gambar 2 MB</label>
                         <div class="custom-file">
                             <input type="file" class="custom-file-input" id="image" name="image" required>
                             <label class="custom-file-label" for="image">Choose file</label>

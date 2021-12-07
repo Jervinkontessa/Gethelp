@@ -41,8 +41,7 @@
                                     <th>Tanggal Berakhir</th>
                                     <th>Donasi Terkumpul</th>
                                     <th>Target Dana</th>
-                                    <th class="text-center">Bukti transfer</th>
-                                    <th>Upload Bukti Transfer</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
 
@@ -57,7 +56,9 @@
                                         <td><?= "Rp " . number_format($d['donasi_terkumpul'], 0, ',', '.'); ?></td>
                                         <td><?= "Rp " . number_format($d['target_donasi'], 0, ',', '.'); ?></td>
                                         <td class="text-center">
-                                            <a href="" class="btn btn-primary btn-upload" style="font-size: 15px;" id="uploadbuktitransfer" data-toggle="modal" data-target="#uploadbuktimodal" data-slug="<?= $d['slug']; ?>">Upload</a>
+                                            <a href="<?= base_url('donasi/edit/') . $d['slug'] ?>" class="text-warning"><i class="fas fa-edit"></i></a>
+                                            <a href="<?= base_url('donasi/delete/') . $d['slug'] ?>" class="text-danger" onClick="return confirm('anda yakin mau hapus campaign ini?')"><i class="fas fa-trash-alt"></i></a>
+                                            <a href="<?= base_url('donasi/update/') . $d['slug'] ?>" class="text-darken"><i class="fas fa-plus"></i></a>
                                         </td>
                                     </tr>
                                     <?php $i++; ?>

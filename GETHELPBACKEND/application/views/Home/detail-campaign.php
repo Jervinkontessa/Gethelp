@@ -98,7 +98,7 @@
                                                         <h6>Penyaluran bantuan.</h6>
                                                         <?= $u['keterangan']; ?>
                                                         <p>
-                                                            <img class="img-responsive" src="<?= base_url('assets/img/buktitransfer/') . $u['gambar'] ?>" id="imageresource">
+                                                            <img class="img-responsive" src="<?= base_url('assets/img/buktitransfer/') . $u['gambar'] ?>" id="imageresource" width="200px">
                                                         </p>
                                                     </div>
                                                     <div class="card-footer">
@@ -363,7 +363,7 @@
                                                 <h6>Penyaluran bantuan.</h6>
                                                 <?= $u['keterangan']; ?>
                                                 <p>
-                                                    <img class="img-responsive" src="<?= base_url('assets/img/buktitransfer/') .  $u['gambar'] ?>" id="imageresource">
+                                                    <img class="img-responsive" src="<?= base_url('assets/img/buktitransfer/') .  $u['gambar'] ?>" id="imageresource" width="150px;">
                                                 </p>
                                             </div>
                                             <div class="card-footer">
@@ -567,13 +567,22 @@
                 </div>
                 <div class="modal-body">
                     <div class="col-md-12 text-15">
-                        <p>Nama: <?= $biodata['nama_lengkap'] ?></p>
-                        <p>Email: <?= $biodata['email'] ?></p>
-                        <p>Nomor Hp (Whatsapp): <?= $biodata['phone'] ?></p>
-                        <p>Alamat: <?= $biodata['alamat'] ?></p>
-                        <a href="<?= base_url('campaign?u=') . $biodata['nama'] ?>" class="font-weight-bold" style="text-decoration:none;">
-                            Lihat daftar donasi <?= $detail['dibuat']; ?>
-                        </a>
+                        <?php if ($biodata) { ?>
+                            <p>Nama: <?= $biodata['nama_lengkap'] ?></p>
+                            <p>Email: <?= $biodata['email'] ?></p>
+                            <p>Nomor Hp (Whatsapp): <?= $biodata['phone'] ?></p>
+                            <p>Alamat: <?= $biodata['alamat'] ?></p>
+                            <a href="<?= base_url('campaign?u=') . $biodata['nama'] ?>" class="font-weight-bold" style="text-decoration:none;">
+                                Lihat daftar donasi <?= $detail['dibuat']; ?>
+                            </a>
+                        <?php } else { ?>
+                            <p>Nama: Gethelp</p>
+                            <p>Email: gethelp.startup@gmail.com</p>
+                            <p>Alamat: Jl. Baji Iman No.50 Makassar, Sulawesi Selatan</p>
+                            <a href="<?= base_url('campaign?u=GetHelp') ?>" class="font-weight-bold" style="text-decoration:none;">
+                                Lihat daftar donasi Gethelp
+                            </a>
+                        <?php }; ?>
                     </div>
                 </div>
                 <div class="modal-footer">

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 06, 2021 at 08:21 AM
+-- Generation Time: Dec 07, 2021 at 08:20 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
@@ -80,8 +80,10 @@ CREATE TABLE `campaign` (
 --
 
 INSERT INTO `campaign` (`campaign_id`, `users_id`, `nama_campaign`, `category_id`, `gambar`, `slug`, `tanggal_dibuat`, `tanggal_berakhir`, `status`, `donasi_terkumpul`, `target_donasi`, `cerita`, `tujuan`, `penerima_donasi`, `rincian`, `jumlah_dicairkan`) VALUES
-(1, 1, 'Bantu kota palu pulih dari bencana', 1, 'thumb1Bantu_kota_palu_pulih_dari_bencana.png', 'bantu-kota-palu-pulih-dari-bencana', '2021-12-04', '2022-05-31', 1, '3000000', '13000000', '<p class=\"text-justify\"><span style=\"font-weight: bolder;\">#GetHelp</span>&nbsp;adalah kegiatan kemanusiaan untuk membagikan makanan berupa nasi bungkus kepada saudara kita yang kelaparan akibat pandemi COVID-19 Walaupun kita sudah memasuki era&nbsp;<em>new normal</em>, bukan berarti pandemi telah usai, banyak saudara-saudara kita yang saat ini masih kesulitan untuk memenuhi kebutuhan sehari-hari.</p><p class=\"text-justify\">Jangan sampai kita berhenti bergerak dalam membantu saudara-saudara kita di masa pandemi ini. Tidak ada kata terlambat untuk saling membantu satu sama lain.</p><p class=\"text-justify\">Sekecil apapun bantuanmu, akan berdampak besar bagi mereka.&nbsp;<span style=\"font-weight: bolder;\">#GetHelp</span>&nbsp;dukung dan berdonasi supaya tercapai 1000 nasi bungkus untuk dibagikan kepada mereka yang membutuhkan uluran tangan kita!</p><p class=\"text-justify\">1000 nasi bungkus ini akan disalurkan ke berbagai daerah dengan angka terdampak covid-19 yang masih tinggi.</p>', 'Membantu warga palu untuk mendapat makanan', 'Warga kota palu', '<p style=\"text-align: justify;\">dana akan digunakan untuk membeli <b>indomie dan beras</b> serta mendirikan posko makanan gratis untuk warga palu</p>', '1000000'),
-(2, 2, 'Bantu warga yang terdampak covid - 19', 1, 'thumb1Bantu_warga_yang_terdampak_covid_-_19.png', 'bantu-warga-yang-terdampak-covid-19', '2021-12-04', '2022-02-28', 1, '0', '30000000', '<p class=\"text-justify\"><span style=\"font-weight: bolder;\">#GetHelp</span> adalah kegiatan kemanusiaan untuk membagikan makanan berupa nasi bungkus kepada saudara kita yang kelaparan akibat pandemi COVID-19 Walaupun kita sudah memasuki era <em>new normal</em>, bukan berarti pandemi telah usai, banyak saudara-saudara kita yang saat ini masih kesulitan untuk memenuhi kebutuhan sehari-hari.</p><p class=\"text-justify\">Jangan sampai kita berhenti bergerak dalam membantu saudara-saudara kita di masa pandemi ini. Tidak ada kata terlambat untuk saling membantu satu sama lain.</p><p class=\"text-justify\">Sekecil apapun bantuanmu, akan berdampak besar bagi mereka. <span style=\"font-weight: bolder;\">#GetHelp</span> dukung dan berdonasi supaya tercapai 1000 nasi bungkus untuk dibagikan kepada mereka yang membutuhkan uluran tangan kita!</p><p class=\"text-justify\">1000 nasi bungkus ini akan disalurkan ke berbagai daerah dengan angka terdampak covid-19 yang masih tinggi.</p>', 'Membantu warga yang di phk karena covid', 'Panti asuhan dan panti jompo', '<p>Dana akan digunakan untuk membeli makanan dan memberi santunan kepada panti asuhan majyarit dan panti jompo sejahtera</p>', '0');
+(1, 1, 'Bantu kota palu pulih dari bencana', 1, 'thumb1Bantu_kota_palu_pulih_dari_bencana.png', 'bantu-kota-palu-pulih-dari-bencana', '2021-12-04', '2022-05-31', 1, '3000000', '13000000', '<p class=\"text-justify\"><span style=\"font-weight: bolder;\">#GetHelp</span> adalah kegiatan kemanusiaan untuk membagikan makanan berupa nasi bungkus kepada saudara kita yang kelaparan akibat pandemi COVID-19 Walaupun kita sudah memasuki era <em>new normal</em>, bukan berarti pandemi telah usai, banyak saudara-saudara kita yang saat ini masih kesulitan untuk memenuhi kebutuhan sehari-hari.</p><p class=\"text-justify\">Jangan sampai kita berhenti bergerak dalam membantu saudara-saudara kita di masa pandemi ini. Tidak ada kata terlambat untuk saling membantu satu sama lain.</p><p class=\"text-justify\">Sekecil apapun bantuanmu, akan berdampak besar bagi mereka. <span style=\"font-weight: bolder;\">#GetHelp</span> dukung dan berdonasi supaya tercapai 1000 nasi bungkus untuk dibagikan kepada mereka yang membutuhkan uluran tangan kita!</p><p class=\"text-justify\">1000 nasi bungkus ini akan disalurkan ke berbagai daerah dengan angka terdampak covid-19 yang masih tinggi.</p>', 'Membantu warga palu untuk mendapat makanan', 'Warga kota palu', '<p style=\"text-align: justify;\">dana akan digunakan untuk membeli <b>indomie dan beras</b> serta mendirikan posko makanan gratis untuk warga palu</p>', '2000000'),
+(2, 2, 'Bantu warga yang terdampak covid - 19', 1, 'thumb1Bantu_warga_yang_terdampak_covid_-_19.png', 'bantu-warga-yang-terdampak-covid-19', '2021-12-04', '2022-02-28', 1, '0', '30000000', '<p class=\"text-justify\"><span style=\"font-weight: bolder;\">#GetHelp</span> adalah kegiatan kemanusiaan untuk membagikan makanan berupa nasi bungkus kepada saudara kita yang kelaparan akibat pandemi COVID-19 Walaupun kita sudah memasuki era <em>new normal</em>, bukan berarti pandemi telah usai, banyak saudara-saudara kita yang saat ini masih kesulitan untuk memenuhi kebutuhan sehari-hari.</p><p class=\"text-justify\">Jangan sampai kita berhenti bergerak dalam membantu saudara-saudara kita di masa pandemi ini. Tidak ada kata terlambat untuk saling membantu satu sama lain.</p><p class=\"text-justify\">Sekecil apapun bantuanmu, akan berdampak besar bagi mereka. <span style=\"font-weight: bolder;\">#GetHelp</span> dukung dan berdonasi supaya tercapai 1000 nasi bungkus untuk dibagikan kepada mereka yang membutuhkan uluran tangan kita!</p><p class=\"text-justify\">1000 nasi bungkus ini akan disalurkan ke berbagai daerah dengan angka terdampak covid-19 yang masih tinggi.</p>', 'Membantu warga yang di phk karena covid', 'Panti asuhan dan panti jompo', '<p>Dana akan digunakan untuk membeli makanan dan memberi santunan kepada panti asuhan majyarit dan panti jompo sejahtera</p>', '0'),
+(3, 1, 'Bagikan makanan untuk kota makassar', 2, 'thumbBagikan_makanan_untuk_kota_makassar.png', 'bagikan-makanan-untuk-kota-makassar', '2021-12-07', '2022-04-30', 1, '0', '12000000', '<p class=\"text-justify\" style=\"color: rgb(33, 37, 41); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;;\"><span style=\"font-weight: bolder;\">#GetHelp</span>&nbsp;adalah kegiatan kemanusiaan untuk membagikan makanan berupa nasi bungkus kepada saudara kita yang kelaparan akibat pandemi COVID-19 Walaupun kita sudah memasuki era&nbsp;<em>new normal</em>, bukan berarti pandemi telah usai, banyak saudara-saudara kita yang saat ini masih kesulitan untuk memenuhi kebutuhan sehari-hari.</p><p class=\"text-justify\" style=\"color: rgb(33, 37, 41); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;;\">Jangan sampai kita berhenti bergerak dalam membantu saudara-saudara kita di masa pandemi ini. Tidak ada kata terlambat untuk saling membantu satu sama lain.</p><p class=\"text-justify\" style=\"color: rgb(33, 37, 41); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;;\">Sekecil apapun bantuanmu, akan berdampak besar bagi mereka.&nbsp;<span style=\"font-weight: bolder;\">#GetHelp</span>&nbsp;dukung dan berdonasi supaya tercapai 1000 nasi bungkus untuk dibagikan kepada mereka yang membutuhkan uluran tangan kita!</p><p class=\"text-justify\" style=\"color: rgb(33, 37, 41); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;;\">1000 nasi bungkus ini akan disalurkan ke berbagai daerah dengan angka terdampak covid-19 yang masih tinggi.</p>', '', '', '', NULL),
+(4, 1, 'Bantu coli', 1, 'thumbtesttomjooooiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii.png', 'bantu-coli', '2021-12-07', '2021-12-31', 0, '0', '12000000', '<p>tesfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff</p>', '', '', '', '0');
 
 -- --------------------------------------------------------
 
@@ -235,7 +237,8 @@ CREATE TABLE `update_campaign` (
 --
 
 INSERT INTO `update_campaign` (`id`, `campaign_id`, `gambar`, `keterangan`, `tanggal`) VALUES
-(1, 1, 'bukti-transfer.jpg', '<p>Rp. 1.000.000</p>\r\n\r\n<p>Bank Account: 123-578-789</P>\r\n<p>Bank Account Name: Fernando Huinardy</p>', '2021-12-04');
+(1, 1, 'bukti-transfer.jpg', '<p>Rp. 1.000.000</p>\r\n\r\n<p>Bank Account: 123-578-789</P>\r\n<p>Bank Account Name: Fernando Huinardy</p>', '2021-12-04'),
+(2, 1, 'buktiBantu_kota_palu_pulih_dari_bencana2021-12-07.png', '<p><b><span style=\"font-family: Arial;\">Mengirim dana</span></b><span style=\"font-family: Arial;\"> ke rekening&nbsp;</span></p><p><span style=\"font-family: Arial;\">pengalang dana bpk susilo heryanto</span></p><p><span style=\"font-family: Arial;\">sebesar Rp. 1.000.000</span></p><p><span style=\"font-family: Arial;\">﻿</span><br></p>', '2021-12-07');
 
 -- --------------------------------------------------------
 
@@ -263,8 +266,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `nama`, `image`, `email`, `password`, `tanggal_dibuat`, `terakhir_login`, `status`, `verifikasi`, `id_jenisakun`, `role`) VALUES
 (1, 'GetHelp', 'gethelp.jpg', 'gethelp.startup@gmail.com', '$2y$10$/9xWw5sVTIhjEzlDZvb/JeWuh18lxPivhlHxHHFZzIhR6Ao7qh23e', '2021-12-04', '2021-12-04', 1, 1, 1, 'admin'),
-(2, 'Naruto Uzumaki', 'default.png', 'jervin.uzumaki@gmail.com', '$2y$10$hluSMJQLZeIT2WePocqfHux/h7zCC0s1Ww9F0Nzny8Ny00T7Gjx42', '2021-12-04', '2021-12-06', 1, 1, 1, 'user'),
-(3, 'Jervin Kontessa', 'default.png', 'jervindescrates@gmail.com', '', '2021-12-04', '2021-12-05', 1, 1, 1, 'user');
+(2, 'Naruto Uzumaki', 'default.png', 'jervin.uzumaki@gmail.com', '$2y$10$hluSMJQLZeIT2WePocqfHux/h7zCC0s1Ww9F0Nzny8Ny00T7Gjx42', '2021-12-04', '2021-12-07', 1, 1, 1, 'user'),
+(3, 'Jervin Kontessa', 'default.png', 'jervindescrates@gmail.com', '', '2021-12-04', '2021-12-07', 1, 1, 1, 'user');
 
 -- --------------------------------------------------------
 
@@ -351,7 +354,7 @@ ALTER TABLE `biodata`
 -- AUTO_INCREMENT for table `campaign`
 --
 ALTER TABLE `campaign`
-  MODIFY `campaign_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `campaign_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -381,7 +384,7 @@ ALTER TABLE `report`
 -- AUTO_INCREMENT for table `update_campaign`
 --
 ALTER TABLE `update_campaign`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`

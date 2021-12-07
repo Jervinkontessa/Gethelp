@@ -38,7 +38,6 @@
                                     <th>Donatur</th>
                                     <th>Jumlah Donasi</th>
                                     <th>Tanggal Transaksi</th>
-                                    <th>Bank</th>
                                     <th>VA Number</th>
                                     <th>Status</th>
                                     <th>Action</th>
@@ -55,7 +54,6 @@
                                         <td><?= $tr['username']; ?></td>
                                         <td><?= "Rp " . number_format($tr['gross_amount'], 0, ',', '.'); ?></td>
                                         <td><?= date('d F Y', strtotime($tr['tanggal_transaksi'])) ?></td>
-                                        <td><?= $tr['bank']; ?></td>
                                         <td><?= $tr['va_number']; ?></td>
                                         <td>
                                             <?php
@@ -74,9 +72,7 @@
                                             }
                                             ?>
                                         </td>
-                                        <td>
-                                            <a href="<?= $tr['pdf_url'] ?>" class="btn btn-primary" target="blank">Download</a>
-                                        </td>
+
                                     </tr>
                                     <?php $i++; ?>
                                 <?php endforeach; ?>

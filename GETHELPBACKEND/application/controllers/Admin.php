@@ -35,8 +35,9 @@ class Admin extends CI_Controller
         $data['title'] = "Dashboard";
         $data['user'] = $this->users_model->getuserlogin($this->session->userdata('admin_data'));
         $data['totaluser'] = $this->users_model->totaluser();
-        $data['pending'] = $this->donasi_model->countpending();
+        $data['pending'] = $this->donasi_model->countpendingcampaign();
         $data['donasiselesai'] = $this->donasi_model->countcampaignselesai();
+        $data['report'] = $this->donasi_model->countreport();
 
 
 

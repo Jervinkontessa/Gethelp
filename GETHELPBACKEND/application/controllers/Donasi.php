@@ -37,7 +37,7 @@ class Donasi extends CI_Controller
 
         if ($data['donasihabis'] != '') {
             $this->db->set('status', 0);
-            $this->db->where('tanggal_berakhir =', $tgl);
+            $this->db->where('tanggal_berakhir <', $tgl);
             $this->db->update('campaign');
         }
 
@@ -66,9 +66,8 @@ class Donasi extends CI_Controller
             $cerita = $this->input->post('cerita');
             $category_id = $this->input->post('category');
             $slug = url_title($namacampaign, 'dash', true);
-            $rand = random_string('alnum', 15);
             $cerita = $this->input->post('cerita');
-
+            $namaimage = 'thumb' . $namacampaign;
 
 
             $uploadimage = $_FILES['image']['name'];
@@ -77,7 +76,7 @@ class Donasi extends CI_Controller
                 $config['allowed_types'] = 'gif|jpg|png|jpeg';
                 $config['max_size'] = '2048';
                 //kb
-                $config['file_name']  = $rand;
+                $config['file_name']  = $namaimage;
                 $config['upload_path'] = './assets/img/donasithumb/';
 
                 $this->load->library('upload', $config);
@@ -112,6 +111,8 @@ class Donasi extends CI_Controller
         $data['donasi'] = $this->donasi_model->getdonasiyangselesai();
 
 
+
+
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
@@ -119,58 +120,14 @@ class Donasi extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-    public function uploadbukti()
-    {
-        $slug = $this->input->post('slug');
-        $data['donasi'] = $this->donasi_model->getdonasiyangselesai($slug);
-
-        $rand = random_string('alnum', 15);
-        $gambar = $data['donasi']['bukti_transfer'];
-
-        $uploadimage = $_FILES['image']['name'];
-
-        //cek jika ada gambar yang akan diupload
-        if (!empty($uploadimage)) {
-            $config['allowed_types'] = 'gif|jpg|png|jpeg';
-            $config['max_size'] = '1048';
-            //kb
-            $config['file_name']  = $rand;
-            $config['upload_path'] = 'assets/img/buktitransfer/';
-            $config['overwrite']   = true;
-
-            $this->load->library('upload', $config);
-
-            if (!$this->upload->do_upload('image')) {
-                // jika tidak berhasil
-
-                $this->session->set_flashdata('error_msg', $this->upload->display_errors());
-                redirect('donasi/selesai');
-            } else {
-                $oldimage = $data['donasi']['bukti_transfer'];
-
-                unlink(FCPATH . 'assets/img/buktitransfer/' . $oldimage);
-                $gambar = $this->upload->data('file_name');
-            }
-            $this->donasi_model->uploadbuktitransfer($slug, $gambar);
-
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-         upload bukti transfer berhasil</div>');
-            redirect('donasi/selesai');
-        } else {
-            $this->donasi_model->uploadbuktitransfer($slug, $gambar);
-
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-         upload bukti transfer berhasil</div>');
-            redirect('donasi/selesai');
-        }
-    }
-
     public function edit($slug)
     {
         $data['title'] = "Edit Campaign";
         $data['user'] = $this->users_model->getuserlogin($this->session->userdata('admin_data'));
-        $data['donasi'] = $this->donasi_model->getdonasiygaktif($slug, '', '', '');
+        $data['donasi'] = $this->donasi_model->getalldonasi($slug);
         $data['category'] = $this->donasi_model->getcategory();
+
+
 
         $this->form_validation->set_rules('namacampaign', 'NamaCampaign', 'required|trim|min_length[10]', [
             'min_length' => 'nama campaign terlalu pendek',
@@ -180,6 +137,7 @@ class Donasi extends CI_Controller
 
             'min_length' => 'Target Donasi Minimal Rp.1.000.000'
         ]);
+        $this->form_validation->set_rules('jumlahdicairkan', 'Jumlahdicairkan', 'required');
         $this->form_validation->set_rules('cerita', ' Cerita', 'required', [
 
             'required' => 'Cerita wajib diisi!'
@@ -193,7 +151,7 @@ class Donasi extends CI_Controller
             $namacampaign = $this->input->post('namacampaign');
             $tanggalberakhir = $this->input->post('tanggalberakhir');
             $targetdonasi =  preg_replace("/[^0-9]/", "", $this->input->post('targetdonasi'));
-
+            $jumlahdicairkan = preg_replace("/[^0-9]/", "", $this->input->post('jumlahdicairkan'));
             $cerita = $this->input->post('cerita');
             $category_id = $this->input->post('category');
             $status = $this->input->post('status');
@@ -226,13 +184,13 @@ class Donasi extends CI_Controller
                     unlink(FCPATH . 'assets/img/donasithumb/' . $oldimage);
                     $gambar = $this->upload->data('file_name');
                 }
-                $this->donasi_model->updatecampaign($slug, $namacampaign, $tanggalberakhir, $targetdonasi, $cerita, $gambar, $category_id, $status);
+                $this->donasi_model->updatecampaign($slug, $namacampaign, $tanggalberakhir, $targetdonasi, $cerita, $gambar, $category_id, $status, $jumlahdicairkan);
 
                 $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
              Data Campaign berhasil diupdate</div>');
                 redirect('donasi');
             } else {
-                $this->donasi_model->updatecampaign($slug, $namacampaign, $tanggalberakhir, $targetdonasi, $cerita, $gambar, $category_id, $status);
+                $this->donasi_model->updatecampaign($slug, $namacampaign, $tanggalberakhir, $targetdonasi, $cerita, $gambar, $category_id, $status, $jumlahdicairkan);
 
                 $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
              Data Campaign berhasil diupdate</div>');
@@ -248,18 +206,63 @@ class Donasi extends CI_Controller
         }
     }
 
-    public function detail($slug)
+    public function update($slug)
     {
-        $data['title'] = "Detail Campaign";
+        $data['title'] = "Tambah kabar terbaru Campaign";
         $data['user'] = $this->users_model->getuserlogin($this->session->userdata('admin_data'));
-        $data['donasi'] = $this->donasi_model->getdonasiygaktif($slug);
+        $data['donasi'] = $this->donasi_model->getalldonasi($slug);
 
-        $data['category'] = $this->donasi_model->getcategory();
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar', $data);
-        $this->load->view('templates/topbar', $data);
-        $this->load->view('donasi/detail', $data);
-        $this->load->view('templates/footer');
+        // var_dump($data['donasi']);
+        // die;
+
+        if (empty($_FILES['bukti']['name'])) {
+            $this->form_validation->set_rules('bukti', 'Bukti', 'required', [
+                'required' => '*Foto bukti wajib dikirim!'
+            ]);
+        }
+        $this->form_validation->set_rules('keterangan', ' Keterangan', 'required', [
+
+            'required' => 'Keterangan wajib diisi!'
+        ]);
+
+
+        if ($this->form_validation->run() == true) {
+            $cid = $data['donasi']['campaign_id'];
+            $keterangan = $this->input->post('keterangan');
+            $datenow = date("Y-m-d");
+            $namaimage =  'bukti' . $data['donasi']['campaign_id'] . $datenow;
+
+            $config['allowed_types'] = 'jpg|png|jpeg';
+            $config['max_size'] = '1048';
+            $config['overwrite']   = true;
+            $config['file_name']  = $namaimage;
+            $config['upload_path'] = './assets/img/buktitransfer/';
+            $this->load->library('upload', $config);
+
+            if (!$this->upload->do_upload('bukti')) {
+                // jika tidak berhasil
+                $this->session->set_flashdata('error_msg', $this->upload->display_errors());
+                $this->load->view('templates/header', $data);
+                $this->load->view('templates/sidebar', $data);
+                $this->load->view('templates/topbar', $data);
+                $this->load->view('donasi/update', $data);
+                $this->load->view('templates/footer');
+            } else {
+
+                $kabarimg = $this->upload->data('file_name');
+                $this->donasi_model->insertkabar($cid, $keterangan, $datenow, $kabarimg);
+                $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+             kabar Campaign berhasil ditambahkan</div>');
+                redirect('donasi');
+            }
+        } else {
+
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('donasi/update', $data);
+            $this->load->view('templates/footer');
+        }
     }
 
     public function delete($slug)

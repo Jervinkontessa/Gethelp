@@ -7,7 +7,11 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb ">
             <li class="breadcrumb-item"><a>Donasi</a></li>
-            <li class="breadcrumb-item "><a href="<?= base_url('donasi'); ?>">List Data</a></li>
+            <?php if ($donasi['status'] == 1) { ?>
+                <li class="breadcrumb-item "><a href="<?= base_url('donasi'); ?>">List Data</a></li>
+            <?php } else { ?>
+                <li class="breadcrumb-item "><a href="<?= base_url('donasi/selesai'); ?>">List Data</a></li>
+            <?php }; ?>
             <li class="breadcrumb-item active" aria-current="page">Edit Data</li>
         </ol>
     </nav>
@@ -37,6 +41,11 @@
                             <?= form_error('targetdonasi', '<div class="alert alert-danger" role="alert">', '</div>'); ?>
                         </div>
                         <div class="form-group">
+                            <label for="targetdonasi">Jumlah dicairkan</label>
+                            <input type="text" class="form-control targetdonasi" id="jumlahdicairkan" name="jumlahdicairkan" value="<?= "Rp " . number_format($donasi['jumlah_dicairkan'], 0, ',', '.'); ?>">
+                            <?= form_error('jumlahdicairkan', '<div class="alert alert-danger" role="alert">', '</div>'); ?>
+                        </div>
+                        <div class="form-group">
                             <label for="category">Ganti Category Yang Sesuai</label>
                             <select name="category" id="category" class="form-control">
                                 <?php foreach ($category as $c) : ?>
@@ -54,7 +63,7 @@
                                 <img src="<?= base_url('assets/img/donasithumb/') . $donasi['gambar'] ?>" class="img-thumbnail img-preview">
                             </div>
                             <div class="col-sm-9">
-                                <label for="image">Ganti Gambar, Max Ukuran Gambar 4 MB</label>
+                                <label for="image">Ganti Gambar, Max Ukuran Gambar 2 MB</label>
                                 <div class="custom-file">
                                     <input type="hidden" name="old_image" value="<?= $donasi['gambar'] ?>">
                                     <input type="file" class="custom-file-input" id="image" name="image">
@@ -66,8 +75,13 @@
                         <div class="form-group">
                             <label for="status">Ubah Status</label>
                             <select name="status" id="status" class="form-control">
-                                <option value="1" selected>Sedang Berjalan</option>
-                                <option value="0">Tidak Berjalan</option>
+                                <?php if ($donasi['status'] == '1') { ?>
+                                    <option value="1" selected>Sedang Berjalan</option>
+                                    <option value="0">Tidak Berjalan</option>
+                                <?php } else { ?>
+                                    <option value="1">Sedang Berjalan</option>
+                                    <option value="0" selected>Tidak Berjalan</option>
+                                <?php } ?>
                             </select>
                         </div>
                         <div class="form-group">

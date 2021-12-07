@@ -391,7 +391,7 @@
                         </div>
 
                         <div class="tab-pane" id="my-donate">
-                            <h6>Donasi Saya</h6>
+                            <h6>Donasi Saya Yang Berhasil</h6>
 
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -414,7 +414,7 @@
                                                         <td><?= $i ?></td>
                                                         <td><?= $d['nama_campaign']; ?></td>
                                                         <td><?= $d['payment_type']; ?></td>
-                                                        <td><?= $d['bank'] ?></td>
+                                                        <td><?= $d['transaction_time'] ?></td>
                                                         <td><?= "Rp " . number_format($d['gross_amount'], 0, ',', '.'); ?></td>
                                                         <td class="text-center">
 

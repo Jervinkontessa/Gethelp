@@ -40,7 +40,6 @@
                                     <th>#</th>
                                     <th>Nama Campaign</th>
                                     <th>Di Buat oleh</th>
-                                    <th>Verifikasi</th>
                                     <th>Tanggal dibuat</th>
                                     <th>Tanggal Berakhir</th>
                                     <th>Donasi Terkumpul</th>
@@ -56,20 +55,6 @@
                                         <td scope="row"><?= $i ?></td>
                                         <td><?= $d['nama_campaign'] ?></td>
                                         <td><?= $d['nama'] ?></td>
-                                        <td class="text-center">
-                                            <?php
-                                            if ($d['verifikasi'] != 1) {
-                                            ?>
-                                                <span class="badge bg-danger text-white">Belum Verifikasi</span>
-                                            <?php
-                                            } else {
-                                            ?>
-                                                <span class="badge bg-success text-white">Terverifikasi</span>
-
-                                            <?php
-                                            }
-                                            ?>
-                                        </td>
                                         <td><?= date('d F Y', strtotime($d['tanggal_dibuat'])) ?></td>
                                         <td><?= date('d F Y', strtotime($d['tanggal_berakhir'])) ?></td>
                                         <td><?= "Rp " . number_format($d['donasi_terkumpul'], 0, ',', '.'); ?></td>

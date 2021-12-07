@@ -219,7 +219,8 @@ class Campaign extends CI_Controller
             $nohp = $this->input->post('nohp');
             $kategori = $this->input->post('kategori');
             $keterangan = $this->input->post('keterangan');
-            $namafile = random_string('alnum', 15);
+            $datenow = date("Y-m-d");
+            $namafile = 'laporan' . $nama . $datenow;
 
 
             $config['allowed_types'] = 'jpg|png|jpeg';
