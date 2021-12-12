@@ -20,7 +20,7 @@
 
     <link rel="shortcut icon" href="<?= base_url('assets/img/profile/') ?>default.jpeg">
     <link rel="stylesheet" href="<?= base_url('assets/summernote/')  ?>summernote-bs4.css">
-    <link href="<?= base_url('assets'); ?>/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="<?= base_url('assets/'); ?>vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link rel="stylesheet" href="<?= base_url('assets/css/')  ?>style.css">
 
 </head>

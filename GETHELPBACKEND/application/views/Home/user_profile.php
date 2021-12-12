@@ -321,10 +321,10 @@
                                 </form>
                             <?php }; ?>
                             <hr>
-                            <form>
+                            <form action="<?= base_url('usersprofile/hapusakun') ?>" method="POST">
                                 <div class="form-group">
-                                    <label for="username">Username</label>
-                                    <input type="text" class="form-control" id="username" placeholder="Masukkan Email Anda Untuk Konfirmasi Hapus Akun">
+                                    <label for="username">Email</label>
+                                    <input type="text" class="form-control" id="email" placeholder="Masukkan Email Anda Untuk Konfirmasi Hapus Akun" name="email" required>
                                 </div>
                                 <hr>
                                 <div class="form-group">
@@ -332,7 +332,7 @@
                                     <p class="text-muted font-size-sm">Setelah Anda menghapus akun Anda, maka anda tidak bisa login dengan akun anda ini dan tidak bisa dikembalikan lagi. Harap dipertimbangkan dengan baik.</p>
                                 </div>
 
-                                <button class="btn btn-danger" type="button">Hapus</button>
+                                <button class="btn btn-danger" type="submit" onClick="return confirm('anda yakin mau hapus akun ini?')">Hapus</button>
 
                             </form>
                         </div>

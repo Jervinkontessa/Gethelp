@@ -134,9 +134,15 @@
                                             <span class="text-muted">Donasi</span>
                                         </li>
                                         <li class="float-left" data-toggle="tooltip" data-original-title="Penggalangan dana akan berakhir pada" style="border-left: 1px solid #989bac;">
-                                            <span class="font-weight-bold"><?= $detail['hari_tersisa'] ?></span>
-                                            <br>
-                                            <span class="text-muted">hari lagi</span>
+                                            <?php if ($detail['hari_tersisa'] < 0) { ?>
+                                                <span class="font-weight-bold">Telah Selesai</span>
+                                            <?php } else { ?>
+                                                <span class="font-weight-bold"><?= $detail['hari_tersisa'] ?></span>
+                                                <br>
+
+                                                <span class="text-muted">hari lagi</span>
+                                            <?php } ?>
+
                                         </li>
                                     </ul>
                                     <div class="clearfix"></div>
@@ -287,9 +293,13 @@
                                     <span class="text-muted">Donasi</span>
                                 </li>
                                 <li class="float-left" data-toggle="tooltip" data-original-title="Penggalangan dana akan berakhir pada" style="border-left: 1px solid #989bac;">
-                                    <strong class="font-weight-bold" style="font-size:1.1em"><?= $detail['hari_tersisa']; ?></strong>
-                                    <br>
-                                    <span class="text-muted">hari lagi</span>
+                                    <?php if ($detail['hari_tersisa'] > 0) { ?>
+                                        <strong class="font-weight-bold" style="font-size:1.1em"><?= $detail['hari_tersisa']; ?></strong>
+                                        <br>
+                                        <span class="text-muted">hari lagi</span>
+                                    <?php } else { ?>
+                                        <strong class="font-weight-bold" style="font-size:1.1em">Telah Selesai</strong>
+                                    <?php } ?>
                                 </li>
                             </ul>
                             <div class="clearfix"></div>

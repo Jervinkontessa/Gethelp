@@ -7,7 +7,7 @@ $route['api/auth/register'] = 'api/auth/register';
 
 //auth
 $route['userlogout'] = 'auth/userlogout';
-
+$route['auth'] = 'auth/index';
 // controller home
 $route['about'] = 'home/about';
 $route['terms'] = 'home/terms';

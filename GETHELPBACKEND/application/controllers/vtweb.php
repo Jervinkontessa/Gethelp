@@ -23,7 +23,7 @@ class Vtweb extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$params = array('server_key' => 'SB-Mid-server-x6tl1BHbdj2pj72x6BitsVyf', 'production' => false);
+		$params = array('server_key' => 'SB-Mid-server-DGabmpeRxgPckTaOxK8j6FVv', 'production' => false);
 		$this->load->library('veritrans');
 		$this->veritrans->config($params);
 		$this->load->helper('url');
@@ -44,6 +44,7 @@ class Vtweb extends CI_Controller
 		$data['css'] = 'donate';
 		$data['js'] = 'donate';
 
+
 		$this->form_validation->set_rules('nominal', 'Nominal', 'required|min_length[6]', [
 			'required' => '*Nominal minimal Rp 10.000',
 			'min_length' => '*Nominal minimal Rp 10.000'
@@ -52,7 +53,7 @@ class Vtweb extends CI_Controller
 			'required' => '*Nama wajib harus ada'
 		]);
 		$this->form_validation->set_rules('nomor', 'Nomor', 'required|numeric|min_length[12]', [
-			'required' => '*Wajib di isi!',
+			'required' => '*Nomor Wajib di isi!',
 			'numeric' => '*Isi nomor telepon dengan angka saja',
 			'min_length' => '*Panjang nomor terlalu pendek',
 		]);

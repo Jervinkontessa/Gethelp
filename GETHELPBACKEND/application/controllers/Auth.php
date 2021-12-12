@@ -131,8 +131,8 @@ class Auth extends CI_Controller
                     $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible" role="alert">
                     Password anda salah!
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
+            <span aria-hidden="true">&times;</span>
+            </button>
                     </div>');
                     redirect('auth');
                 }
@@ -140,8 +140,8 @@ class Auth extends CI_Controller
                 $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible" role="alert">
             akun anda belum teraktivasi coba cek email anda
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
+            <span aria-hidden="true">&times;</span>
+             </button>
             </div>');
 
                 redirect('auth');
@@ -291,7 +291,7 @@ class Auth extends CI_Controller
             'newline'   => "\r\n"
         ];
 
-
+        $image = base_url('assets/img/logo.png');
 
         $this->load->library('email', $config);
         $this->email->initialize($config);
@@ -320,7 +320,7 @@ class Auth extends CI_Controller
   <p>Silahkan aktivasi akun anda, <b>jangan dibagikan ke orang lain!</b> <a href="' . base_url() . 'auth/verify?email=' . $to . '&token=' . urlencode($token) . '" >Activasi akun</a></p>
   <p>Hormat kami,</p>
   <p style="margin-bottom:10px">
-  <img src="https://lh3.googleusercontent.com/8c0W8_Zk38CPBivX5kGKBnlTGTBoLqXyT-eJ9G58v-l0dt4ko1x7P_5XlvTb8MN7EImf9FZWfwH4_A3G4JiwOwJ2QY0MC_3b98u6HkvVMNv2krWxqgMQrHbL0-gNTR7b02S09W0M3LsrHJRESxNFCvL6RUv5W941OKSMHZxr8nUUqY_d5AoL6lmCt7CNsLifR6hVNKjy_2WjCaJ1FxRq8HJ26DZ4fc2yVhVz9vM46GgSR-YWTyOSXnyApBQDdaQ3UhWvBhUdarUsiJHj7NkaH5mnV52_8NLVlfV4rtAr095wpsVtxCir9Bq_sSLEYjqkXTue7u3LBXUouN-c93jyYwOGB7qofpGQtOa0TTSx3NC6i42HeiLGnhVrNSxH32s3SgW7ujfMIkIqfuKs9sxmyE48GtUz_LjkNyQb5AO084SzTnta8lauza7IOy4DaOorinU6yo8rSjRShC1f3YdPthR7Eq_KA8j5UeNccOul1rqz7UyVubjnpb4AMv3aI4K7YpHMKkCZh_MbtZVtLZyD_kghS8Pbsh9tr9TiJ7my6v886n1K_1IQo63bhU1zZNJWkxi8eN5hF3Q9SA4uQ6hiZe48PeC87wHvzW8xl9IBPRv_HyRHzlYctuKRSE2s-xAKljKcd5HFv25pxuJoy7gSk38-GaoNV88UiDV9nmlsv4f-Q1SeKayQVURDUL-LDmMsEdE9PAQN3CwuyeiM4wTuBzU=w118-h67-no" style="width: 30%;">
+  <img src="' . $image . '" style="width: 30%;">
   </p>
   </td>
   </tr>
@@ -346,7 +346,7 @@ class Auth extends CI_Controller
             <p>Tidak aktif lagi maka anda harus meminta link yang baru <a href= "' . base_url('auth/lupapassword') . '">disini</a></p>
             <p>Hormat kami,</p>
   <p style="margin-bottom:10px">
-  <img src="https://lh3.googleusercontent.com/fife/AAWUweV1sQgDoYdYEdj3u-3dHsN4HYxE3XSnGi6OD1ykr8r_lwxRvKmY0JDedBVcFGKvKmzyB2yDCdW1hhgEdCifL858A1BhTl6F-gjCYBpeu_xsQ-JVE2DAzbg3_WW29AtaWyI2pGk8JEFTH5uC0lwpDo_vtBT2oekPEKVYnlGFTd90E40AtSL8WGwqzDzQ1SfN3CWa8GKbD62sLYn9cyiS3tHA7v4JdAf9Y1Xd3X3kQBv-ymdDtts2FJpu-c7sYp9fbjE57PIJSXXqY0WYlZBstM3qZEbhlYeu4KV_U2wuUkZ8ZEz-8CBUu7OvwjBa_ZM8g-cru7q4WJ2vOTXmdNGAgybTxGhvNOxUHsEy5f8ihQiwAh8lkxKMTcLRs5dSgdD3KsvemZmdR6WwyUYQ_ZCCv9OxyzAL64W1gkZyxkNba9F6QDeKXO82M8FZOMneCbvIV72fee1W8Eb3xqqsTNC3qD43w1K82yuH58Wqh0zOp9QdA64VL3ndIDAGd5xC3NFbyGiHeP80-sIhL8b0vVBkk2wD1YCCHOhWOX5fJUhIw_BOcQZlCf5830lKSJ_65ZMMeot9GwR1ZhWkpd0uGBH5oFfr-AG6VfVcnai31lDIcj6Vzuvo8yyzpnkhnVJDoph6XiUBCwEMqPHoponpCbkQInMoFeEPdB6DbAfh5YqR9Z0_1WbcXBN77Yhd0A4A3X7xoIi4aREMyezSTzfQN_J2qvkPBRu5XymR6svHdebQwH67IismZiauwQZHZ9DEdLsd-7CqauU2tn5xnBMbU-cn5RAqnAYXdGAcmGAI7TvNRS8JIZngAsPsZQ8ibFswHrfnxZTsK2Kqa_0WWjppN75Mx68Bda7NobW0bza2ekFIfaK6VBw_geqeIfa86Qc12FaNxHdpXRrX68u168d07V2CJZA-ilxzzOrAyrjwmIZcn7VKSnRXfC_u8i1sy7sMtsMv8atw_spEoHrCLnBAsRdCrIqUeVsrvRL4VQN_9Jl5ZOpZg-op2GzlaZn1U7AEUXE1BwI0PaFEpDMq8fDhMsX9vMgCM6sVTGu4sdMiNmj8g1-koVOdrGZESTexeEg2vFv4cDyTX3PqqGHmtgw5keRjquIvLofcwV32-lDDYNAyib5oZzOH1TO8EjGf8ayEeVaXKJZ1NZYqlVuF3dNMqUhs4SwfMevr3BwRQCjqmBeWGbKJTpyf8LBmDiSx0YafmfKqA46D5QlWeZoE7gzWP8XEoOQORhZz2CNIRh7F5Z4fzwlC0qUnaG9rbY2B_rEZ36Fk5J1b6lVy0J2QeKfjL3eQxRJ0QuBBd6vvf6mCRiqEUrOZpacQE8axHu6dvg6In-xuYnm04_Vp-JsFwUHmv6ymWqdRDvwDrV7icWuJFwKR-xkDAilmh_1e0J_-lZR2igSXEsC7jF19h9DKiExLnPdMi5dDrovARmQtXQ37GgDJ6PJvuQ7aPfA_Iui-Wn6VoHb_JvNJQ250lFATziMij47GRVVtLfA1GS1neIRCnGhGX310TCYixkFn7F6CjuXrpUVg0bEAHgqYLpo9nYSqgzK_YDrIAF8RUkE2q5SLkIESQTz-kOfenIuMMAuB89ykzbiaOOZghoy4ZZ0mmUbwPGj9FTbKDCVK92BiZsh5daG4AbaeancxBTklklmbIrXWDyinOy9wCFGktMlBGxHpR13AO_5qI-TusE8dV-Qw07Dp4Nsc2j4GEjf5Exz9xCwpIPOll_lb-qOmRDIO8PCrK0BZzxMi8Lvym0Ae99oV1Ii-zADDR5eJ9E2yJBTAhF1yMepk8_bxrikBpn-xcxpMKAcx5OLkSqYE1BGcJduu-LL8csVu6o1GXj-Unw-Z9MpOALkUp9viTZiYh0tSee2Tp0BAhuq9WNCj9AIbcMPlYPbdncVIXtROTS_BF-W88QXqNzAn5Vk2crKicumo7oBS2jzJI_kpyY8y4t0YiDN8v60fB6VmSZQHmJmhIu7-aGKsVpw71tzBQxV8268yfHgTP4umtKYisdkEgC4Up_seuZoLSeK1nPf9SCio7icSgkZ2ej08bIiVHYGEDNGa-rk4FwR9zt_iKLqZ7_yTJVMeSp9ZH4vDpsmFCVjnwMFWZbNgjWWwLVO5tCAxTV_VAI8TNI5uKdhAZJuO58Zj__1KGmpezlJk6xiYkL75AdCEw_LTCCVXjpTiY0JBZFSku1Lsh9sRKObeX69PlMan_lG_A0L0TSU7UWZkIVpjCkv42V9auKoPd4SMYrrrVVXH8AGPRftfE7J4pAZ2iwZIBHTLJqzUKA_Dinznovf24F7mqkPaLMakdO6Py9HYOYkWLI-CZCK7bS_3f6SweJSoL7R7c4MCr3ixFK9kHDpZsbmauqdxmEELeIOft9d0JX7R8hYBZJKTJs5OWygHB0DzZOWx7RcB73HkUxGwM4afg7jlp10JA9kZlWNiiMwl2M9a81sGnjZHhZGJGADfjQQZKJ88ECu64bXLEDm9tM3yT2AgPSs8vvKrhGz3eibP7lMPNu0THEABCAYX6sBla9wsCaIODAK2EvcHk7lm5fvYWIAJQ-a6BHrHH50x-i6O4L7fgb4bLecnlnO3jUkkm5JBCrPK5pQpEka1G9LpiDhOzRcN2IH7wo1hERuHaPzfJd6njlEeroK-X4-2td1H7g4Z900RrvJvzgmNTh9pD1aa6F5UNA7BJK01s0rIL9TnGBJv472WI5axvtrOOd9UqpXvBgnSmgqYRjGJMxVxzxiXfPt-arjN7PmGURuboMTrsBCxynss3zrWZnF8kv0ol-VKqxHKMaT-qNMnxjsRvxJxMZYfaFYNa7hIV0vo4RMLhfJvTIQnBiC9F9h_SKxBAFsFEWPI7seKLamjDwbFTR4yXAXIVpjst50OtjzY0CujMMn7z1KqNnVhREnBlDBhvqHr-LITtkEcqcVdnIsGyC_SA6RAyNIe5Wu-vD1sZlVxlcUdzw4BjH5UnEmbXTv8vMnbvd4SHhpUzJ49YkZ_iRQ-PPCAOyiDfbsr9T0u32rJSmuSH8GZzoiA7qK2R7L_zwqudKiTWGGwKf-NTPtD6NlZRswuzmj4x9fjQLEZCh8kj8hLJxwB3nZU6n9OsjeJoi_w2_yqUN9Y-5xaLDTjkuyftGzGoHhu0f6Gh-4dtS21i84VCt8HEr6wj_h0CLPv7IBQRM6fBISTe0jY-Lf4qUgj76vOYesxy77btAO_VAhP0vC3j2LpMXdgxO_XSGAOPhl2JW-6Z8q8vJaiRjfetJ4zFqpqRnj-yEc9_6tG40xfpkYuFCOwoXDdNkEPPZ5znUCyBJyIzaIGCNwuhIPRJ5DOlYnIf_MGrBTUZAVkGmxei9h6RYeltf4jRc4lj_Gtc_6984FoLEjAuW6_HPJYh5M1LKdUy5rCP53A06BNiIZoqQJJeGuUcTy41RZb9i14XtgzL2ydBdmUCKP9JUfQiZ9fFY0BUP77M-5H0USBM-bHHHWOWfIMYFUunvjdFie5_BWpznugA0Yt4dS1st0XcZLT-helSZMbh2OzWwLpGCWIkx5gyg2y8ucirYzVlluW9R1g3lxZMUuTpsH4fxZKfgchPNMcvWt_gZnR9paDr9Pl954_pVpJJaxmf3RJKxBxTsMdIisN0kozHkf_xu4iUDntkVcrBgjd_vHUtwXvENr7wMzH1W0ptjuQfn5FTUwnPVFb9tbmQxaOgFync1NerTR_Ded5Qphfe6qe88cdHb8LM-rmtDVoR3Ad_TuILoc=s118-w118-h67-no" style="width: 30%;">
+  <img src="' . $image . '" style="width: 30%;">
             </td>
             </tr>
             </tbody>
@@ -374,7 +374,7 @@ class Auth extends CI_Controller
   <p>Silahkan login dengan akun anda dan mulailah donasi pertama mu di Gethelp <a href="http://localhost/GETHELPBACKEND/auth">Login</a></p>
   <p>Hormat kami,</p>
   <p style="margin-bottom:10px">
-  <img src="https://lh3.googleusercontent.com/fife/AAWUweV1sQgDoYdYEdj3u-3dHsN4HYxE3XSnGi6OD1ykr8r_lwxRvKmY0JDedBVcFGKvKmzyB2yDCdW1hhgEdCifL858A1BhTl6F-gjCYBpeu_xsQ-JVE2DAzbg3_WW29AtaWyI2pGk8JEFTH5uC0lwpDo_vtBT2oekPEKVYnlGFTd90E40AtSL8WGwqzDzQ1SfN3CWa8GKbD62sLYn9cyiS3tHA7v4JdAf9Y1Xd3X3kQBv-ymdDtts2FJpu-c7sYp9fbjE57PIJSXXqY0WYlZBstM3qZEbhlYeu4KV_U2wuUkZ8ZEz-8CBUu7OvwjBa_ZM8g-cru7q4WJ2vOTXmdNGAgybTxGhvNOxUHsEy5f8ihQiwAh8lkxKMTcLRs5dSgdD3KsvemZmdR6WwyUYQ_ZCCv9OxyzAL64W1gkZyxkNba9F6QDeKXO82M8FZOMneCbvIV72fee1W8Eb3xqqsTNC3qD43w1K82yuH58Wqh0zOp9QdA64VL3ndIDAGd5xC3NFbyGiHeP80-sIhL8b0vVBkk2wD1YCCHOhWOX5fJUhIw_BOcQZlCf5830lKSJ_65ZMMeot9GwR1ZhWkpd0uGBH5oFfr-AG6VfVcnai31lDIcj6Vzuvo8yyzpnkhnVJDoph6XiUBCwEMqPHoponpCbkQInMoFeEPdB6DbAfh5YqR9Z0_1WbcXBN77Yhd0A4A3X7xoIi4aREMyezSTzfQN_J2qvkPBRu5XymR6svHdebQwH67IismZiauwQZHZ9DEdLsd-7CqauU2tn5xnBMbU-cn5RAqnAYXdGAcmGAI7TvNRS8JIZngAsPsZQ8ibFswHrfnxZTsK2Kqa_0WWjppN75Mx68Bda7NobW0bza2ekFIfaK6VBw_geqeIfa86Qc12FaNxHdpXRrX68u168d07V2CJZA-ilxzzOrAyrjwmIZcn7VKSnRXfC_u8i1sy7sMtsMv8atw_spEoHrCLnBAsRdCrIqUeVsrvRL4VQN_9Jl5ZOpZg-op2GzlaZn1U7AEUXE1BwI0PaFEpDMq8fDhMsX9vMgCM6sVTGu4sdMiNmj8g1-koVOdrGZESTexeEg2vFv4cDyTX3PqqGHmtgw5keRjquIvLofcwV32-lDDYNAyib5oZzOH1TO8EjGf8ayEeVaXKJZ1NZYqlVuF3dNMqUhs4SwfMevr3BwRQCjqmBeWGbKJTpyf8LBmDiSx0YafmfKqA46D5QlWeZoE7gzWP8XEoOQORhZz2CNIRh7F5Z4fzwlC0qUnaG9rbY2B_rEZ36Fk5J1b6lVy0J2QeKfjL3eQxRJ0QuBBd6vvf6mCRiqEUrOZpacQE8axHu6dvg6In-xuYnm04_Vp-JsFwUHmv6ymWqdRDvwDrV7icWuJFwKR-xkDAilmh_1e0J_-lZR2igSXEsC7jF19h9DKiExLnPdMi5dDrovARmQtXQ37GgDJ6PJvuQ7aPfA_Iui-Wn6VoHb_JvNJQ250lFATziMij47GRVVtLfA1GS1neIRCnGhGX310TCYixkFn7F6CjuXrpUVg0bEAHgqYLpo9nYSqgzK_YDrIAF8RUkE2q5SLkIESQTz-kOfenIuMMAuB89ykzbiaOOZghoy4ZZ0mmUbwPGj9FTbKDCVK92BiZsh5daG4AbaeancxBTklklmbIrXWDyinOy9wCFGktMlBGxHpR13AO_5qI-TusE8dV-Qw07Dp4Nsc2j4GEjf5Exz9xCwpIPOll_lb-qOmRDIO8PCrK0BZzxMi8Lvym0Ae99oV1Ii-zADDR5eJ9E2yJBTAhF1yMepk8_bxrikBpn-xcxpMKAcx5OLkSqYE1BGcJduu-LL8csVu6o1GXj-Unw-Z9MpOALkUp9viTZiYh0tSee2Tp0BAhuq9WNCj9AIbcMPlYPbdncVIXtROTS_BF-W88QXqNzAn5Vk2crKicumo7oBS2jzJI_kpyY8y4t0YiDN8v60fB6VmSZQHmJmhIu7-aGKsVpw71tzBQxV8268yfHgTP4umtKYisdkEgC4Up_seuZoLSeK1nPf9SCio7icSgkZ2ej08bIiVHYGEDNGa-rk4FwR9zt_iKLqZ7_yTJVMeSp9ZH4vDpsmFCVjnwMFWZbNgjWWwLVO5tCAxTV_VAI8TNI5uKdhAZJuO58Zj__1KGmpezlJk6xiYkL75AdCEw_LTCCVXjpTiY0JBZFSku1Lsh9sRKObeX69PlMan_lG_A0L0TSU7UWZkIVpjCkv42V9auKoPd4SMYrrrVVXH8AGPRftfE7J4pAZ2iwZIBHTLJqzUKA_Dinznovf24F7mqkPaLMakdO6Py9HYOYkWLI-CZCK7bS_3f6SweJSoL7R7c4MCr3ixFK9kHDpZsbmauqdxmEELeIOft9d0JX7R8hYBZJKTJs5OWygHB0DzZOWx7RcB73HkUxGwM4afg7jlp10JA9kZlWNiiMwl2M9a81sGnjZHhZGJGADfjQQZKJ88ECu64bXLEDm9tM3yT2AgPSs8vvKrhGz3eibP7lMPNu0THEABCAYX6sBla9wsCaIODAK2EvcHk7lm5fvYWIAJQ-a6BHrHH50x-i6O4L7fgb4bLecnlnO3jUkkm5JBCrPK5pQpEka1G9LpiDhOzRcN2IH7wo1hERuHaPzfJd6njlEeroK-X4-2td1H7g4Z900RrvJvzgmNTh9pD1aa6F5UNA7BJK01s0rIL9TnGBJv472WI5axvtrOOd9UqpXvBgnSmgqYRjGJMxVxzxiXfPt-arjN7PmGURuboMTrsBCxynss3zrWZnF8kv0ol-VKqxHKMaT-qNMnxjsRvxJxMZYfaFYNa7hIV0vo4RMLhfJvTIQnBiC9F9h_SKxBAFsFEWPI7seKLamjDwbFTR4yXAXIVpjst50OtjzY0CujMMn7z1KqNnVhREnBlDBhvqHr-LITtkEcqcVdnIsGyC_SA6RAyNIe5Wu-vD1sZlVxlcUdzw4BjH5UnEmbXTv8vMnbvd4SHhpUzJ49YkZ_iRQ-PPCAOyiDfbsr9T0u32rJSmuSH8GZzoiA7qK2R7L_zwqudKiTWGGwKf-NTPtD6NlZRswuzmj4x9fjQLEZCh8kj8hLJxwB3nZU6n9OsjeJoi_w2_yqUN9Y-5xaLDTjkuyftGzGoHhu0f6Gh-4dtS21i84VCt8HEr6wj_h0CLPv7IBQRM6fBISTe0jY-Lf4qUgj76vOYesxy77btAO_VAhP0vC3j2LpMXdgxO_XSGAOPhl2JW-6Z8q8vJaiRjfetJ4zFqpqRnj-yEc9_6tG40xfpkYuFCOwoXDdNkEPPZ5znUCyBJyIzaIGCNwuhIPRJ5DOlYnIf_MGrBTUZAVkGmxei9h6RYeltf4jRc4lj_Gtc_6984FoLEjAuW6_HPJYh5M1LKdUy5rCP53A06BNiIZoqQJJeGuUcTy41RZb9i14XtgzL2ydBdmUCKP9JUfQiZ9fFY0BUP77M-5H0USBM-bHHHWOWfIMYFUunvjdFie5_BWpznugA0Yt4dS1st0XcZLT-helSZMbh2OzWwLpGCWIkx5gyg2y8ucirYzVlluW9R1g3lxZMUuTpsH4fxZKfgchPNMcvWt_gZnR9paDr9Pl954_pVpJJaxmf3RJKxBxTsMdIisN0kozHkf_xu4iUDntkVcrBgjd_vHUtwXvENr7wMzH1W0ptjuQfn5FTUwnPVFb9tbmQxaOgFync1NerTR_Ded5Qphfe6qe88cdHb8LM-rmtDVoR3Ad_TuILoc=s118-w118-h67-no" style="width: 30%;">
+  <img src="' . $image . '" style="width: 30%;">
   </p>
   </td>
   </tr>

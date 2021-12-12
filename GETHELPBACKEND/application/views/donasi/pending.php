@@ -61,9 +61,7 @@
 
                                         <td><?= "Rp " . number_format($d['target_donasi'], 0, ',', '.'); ?></td>
                                         <td class="text-center">
-                                            <a class="text-warning" data-toggle="modal" data-target="#editusermodal" id="ubah-status-btn"><i class="fas fa-edit"></i></a>
-                                            <a href="<?= base_url('donasi/pendingdetail/') . $d['slug'] ?>" class="text-info"><i class="fas fa-eye"></i></a>
-
+                                            <a class="text-warning" href="<?= base_url('donasi/pendingdetail/') . $d['slug'] ?>"><i class="fas fa-edit"></i></a>
                                         </td>
                                     </tr>
                                     <?php $i++; ?>

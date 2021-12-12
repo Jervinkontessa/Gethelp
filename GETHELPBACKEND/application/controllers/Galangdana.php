@@ -42,6 +42,7 @@ class Galangdana extends CI_Controller
         $userid = $data['user']['id'];
         $email = $data['user']['email'];
 
+
         $this->form_validation->set_rules('nama', 'Nama', 'required', [
             'required' => '*Nama wajib di isi!'
         ]);
@@ -145,7 +146,7 @@ class Galangdana extends CI_Controller
         ];
 
 
-
+        $image = base_url('assets/img/logo.png');
         $this->load->library('email', $config);
         $this->email->initialize($config);
 
@@ -171,7 +172,7 @@ class Galangdana extends CI_Controller
       <p>Kami akan mengabari status terbaru campaign anda di email anda.</p>
       <p>Hormat kami,</p>
       <p style="margin-bottom:10px">
-      <img src="https://lh3.googleusercontent.com/8c0W8_Zk38CPBivX5kGKBnlTGTBoLqXyT-eJ9G58v-l0dt4ko1x7P_5XlvTb8MN7EImf9FZWfwH4_A3G4JiwOwJ2QY0MC_3b98u6HkvVMNv2krWxqgMQrHbL0-gNTR7b02S09W0M3LsrHJRESxNFCvL6RUv5W941OKSMHZxr8nUUqY_d5AoL6lmCt7CNsLifR6hVNKjy_2WjCaJ1FxRq8HJ26DZ4fc2yVhVz9vM46GgSR-YWTyOSXnyApBQDdaQ3UhWvBhUdarUsiJHj7NkaH5mnV52_8NLVlfV4rtAr095wpsVtxCir9Bq_sSLEYjqkXTue7u3LBXUouN-c93jyYwOGB7qofpGQtOa0TTSx3NC6i42HeiLGnhVrNSxH32s3SgW7ujfMIkIqfuKs9sxmyE48GtUz_LjkNyQb5AO084SzTnta8lauza7IOy4DaOorinU6yo8rSjRShC1f3YdPthR7Eq_KA8j5UeNccOul1rqz7UyVubjnpb4AMv3aI4K7YpHMKkCZh_MbtZVtLZyD_kghS8Pbsh9tr9TiJ7my6v886n1K_1IQo63bhU1zZNJWkxi8eN5hF3Q9SA4uQ6hiZe48PeC87wHvzW8xl9IBPRv_HyRHzlYctuKRSE2s-xAKljKcd5HFv25pxuJoy7gSk38-GaoNV88UiDV9nmlsv4f-Q1SeKayQVURDUL-LDmMsEdE9PAQN3CwuyeiM4wTuBzU=w118-h67-no" style="width: 30%;">
+      <img src="' . $image . '" style="width: 30%;">
       </p>
       </td>
       </tr>

@@ -27,6 +27,23 @@ class Users_model extends CI_Model
         $query = $this->db->get('biodata');
         return $query->row_array();
     }
+    public function getuserdetail($id = '')
+    {
+        $this->db->select('*, jenis_akun.nama AS jenis_akun');
+        $this->db->join('users', 'users.id = biodata.users_id');
+        $this->db->join('jenis_akun', 'users.id_jenisakun = jenis_akun.id');
+        $this->db->where('biodata.users_id', $id);
+        $query = $this->db->get('biodata');
+        return $query->row_array();
+    }
+
+    public function getorganisasi($id)
+    {
+        $this->db->select('*');
+        $this->db->where('users_id', $id);
+        $query = $this->db->get('organisasi');
+        return $query->row_array();
+    }
     public function getuser($id = '', $email = '')
     {
         if ($id != '') {
@@ -203,5 +220,17 @@ class Users_model extends CI_Model
         $this->db->set('password', $password_hash);
         $this->db->where('email', $this->session->userdata('admin_data'));
         $this->db->update('users');
+    }
+
+    public function deletebiodata($id)
+    {
+        $this->db->where('users_id', $id);
+        $this->db->delete('biodata');
+    }
+
+    public function deleteorganisasi($id)
+    {
+        $this->db->where('users_id', $id);
+        $this->db->delete('organisasi');
     }
 }

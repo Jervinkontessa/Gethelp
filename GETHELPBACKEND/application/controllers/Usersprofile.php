@@ -114,7 +114,89 @@ class Usersprofile extends CI_Controller
         }
     }
 
+    public function hapusakun()
+    {
+        $data['user'] = $this->users_model->getuser('', $this->session->userdata('user_data'));
+        $id = $data['user']['id'];
+        $jenisakun = $data['user']['jenis_akun'];
+        $data['biodata'] = $this->users_model->getbiodata($id);
+        $data['yayasan'] = $this->users_model->getorganisasi($id);
+        if ($data['biodata'] != null) {
+            $ktpbiodata = $data['biodata']['ktp'];
+            $ktpselfie = $data['biodata']['selfie_ktp'];
+        }
+        if ($data['yayasan'] != null) {
+            $ktppj = $data['yayasan']['ktp_pj'];
+            $berkasP = $data['yayasan']['berkas_pendukung'];
+        }
+        // var_dump($data['user']);
+        // die;
+        $imageuser = $data['user']['image'];
+        $usermail = $this->input->post('email');
 
+        if ($usermail != $data['user']['email']) {
+            $this->session->set_flashdata('error_msg2', 'Masukkan email akun anda, bukan email yang lain.');
+            redirect('usersprofile');
+        } else {
+            if ($jenisakun == 'Individu' && $data['biodata'] != null) {
+                if ($imageuser != 'default.png') {
+                    unlink(FCPATH . 'assets/img/users/profile/' . $imageuser);
+                }
+                unlink(FCPATH . 'assets/img/users/ktp/' . $ktpbiodata);
+                unlink(FCPATH . 'assets/img/users/selfie/' . $ktpselfie);
+                $this->session->unset_userdata('user_data');
+                $this->session->unset_userdata('access_token');
+                $this->session->unset_userdata('jenis-akun');
+                $this->users_model->hapus($id);
+                $this->users_model->deletebiodata($id);
+                $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible" role="alert">
+        Akun anda berhasil Dihapus
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+        </div>');
+                redirect('auth');
+            } elseif ($jenisakun == 'Individu' && $data['biodata'] == null) {
+                if ($imageuser != 'default.png') {
+                    unlink(FCPATH . 'assets/img/users/profile/' . $imageuser);
+                }
+                $this->session->unset_userdata('user_data');
+                $this->session->unset_userdata('access_token');
+                $this->session->unset_userdata('jenis-akun');
+                $this->users_model->hapus($id);
+                $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible" role="alert">
+        Akun anda berhasil Dihapus
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+        </div>');
+                redirect('auth');
+            } elseif ($jenisakun != 'Individu') {
+                if ($imageuser != 'default.png') {
+                    unlink(FCPATH . 'assets/img/users/profile/' . $imageuser);
+                }
+                unlink(FCPATH . 'assets/img/users/ktp/' . $ktpbiodata);
+                unlink(FCPATH . 'assets/img/users/selfie/' . $ktpselfie);
+                unlink(FCPATH . 'assets/img/users/ktppj/' . $ktppj);
+                if ($data['yayasan']['berkas_pendukung'] != '') {
+                    unlink(FCPATH . 'assets/img/users/berkasP/' . $berkasP);
+                }
+                $this->session->unset_userdata('user_data');
+                $this->session->unset_userdata('access_token');
+                $this->session->unset_userdata('jenis-akun');
+                $this->users_model->hapus($id);
+                $this->users_model->deletebiodata($id);
+                $this->users_model->deleteorganisasi($id);
+                $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible" role="alert">
+        Akun anda berhasil Dihapus
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+        </div>');
+                redirect('auth');
+            }
+        }
+    }
     public function newpassword()
     {
 
@@ -299,7 +381,7 @@ class Usersprofile extends CI_Controller
                 } else {
                     $selfie = $this->upload->data('file_name');
                     $this->verifikasi_model->masukkan_biodata($userid, $nama, $alamat, $nohp, $noktp, $bank, $norek, $namaprek, $ktp, $selfie);
-                    $this->verifikasi_model->updatestatus($userid);
+                    $this->verifikasi_model->updatejenisakun($userid);
 
                     $this->_sendemail($nama, $email);
                     redirect('user');
@@ -452,7 +534,7 @@ class Usersprofile extends CI_Controller
                             $ktppj = $this->upload->data('file_name');
                             $this->verifikasi_model->masukkan_organisasi($userid, $namapj, $namaorg, $nopj, $ktppj);
                             $this->verifikasi_model->masukkan_biodata($userid, $nama, $alamat, $nohp, $noktp, $bank, $norek, $namaprek, $ktp, $selfie);
-                            $this->verifikasi_model->updatestatus($userid);
+                            $this->verifikasi_model->updatejenisakun($userid, 2);
 
                             $this->_sendemail($nama, $email);
                             redirect('user');
@@ -519,7 +601,7 @@ class Usersprofile extends CI_Controller
                                 $berkaspendukung = $this->upload->data('file_name');
                                 $this->verifikasi_model->masukkan_organisasi($userid, $namapj, $namaorg, $nopj, $ktppj, $berkaspendukung);
                                 $this->verifikasi_model->masukkan_biodata($userid, $nama, $alamat, $nohp, $noktp, $bank, $norek, $namaprek, $ktp, $selfie);
-                                $this->verifikasi_model->updatestatus($userid);
+                                $this->verifikasi_model->updatejenisakun($userid, 2);
 
                                 $this->_sendemail($nama, $email);
                                 redirect('user');
@@ -538,6 +620,7 @@ class Usersprofile extends CI_Controller
 
 
 
+
     private function _sendemail($username, $to)
     {
         $config = [
@@ -550,7 +633,7 @@ class Usersprofile extends CI_Controller
             'charset'   => 'utf-8',
             'newline'   => "\r\n"
         ];
-
+        $image = base_url('assets/img/logo.png');
 
 
         $this->load->library('email', $config);
@@ -578,7 +661,7 @@ class Usersprofile extends CI_Controller
       <p>kami akan membuka kembali link untuk verifikasi akun anda kembali.</p>
       <p>Hormat kami,</p>
       <p style="margin-bottom:10px">
-      <img src="https://lh3.googleusercontent.com/8c0W8_Zk38CPBivX5kGKBnlTGTBoLqXyT-eJ9G58v-l0dt4ko1x7P_5XlvTb8MN7EImf9FZWfwH4_A3G4JiwOwJ2QY0MC_3b98u6HkvVMNv2krWxqgMQrHbL0-gNTR7b02S09W0M3LsrHJRESxNFCvL6RUv5W941OKSMHZxr8nUUqY_d5AoL6lmCt7CNsLifR6hVNKjy_2WjCaJ1FxRq8HJ26DZ4fc2yVhVz9vM46GgSR-YWTyOSXnyApBQDdaQ3UhWvBhUdarUsiJHj7NkaH5mnV52_8NLVlfV4rtAr095wpsVtxCir9Bq_sSLEYjqkXTue7u3LBXUouN-c93jyYwOGB7qofpGQtOa0TTSx3NC6i42HeiLGnhVrNSxH32s3SgW7ujfMIkIqfuKs9sxmyE48GtUz_LjkNyQb5AO084SzTnta8lauza7IOy4DaOorinU6yo8rSjRShC1f3YdPthR7Eq_KA8j5UeNccOul1rqz7UyVubjnpb4AMv3aI4K7YpHMKkCZh_MbtZVtLZyD_kghS8Pbsh9tr9TiJ7my6v886n1K_1IQo63bhU1zZNJWkxi8eN5hF3Q9SA4uQ6hiZe48PeC87wHvzW8xl9IBPRv_HyRHzlYctuKRSE2s-xAKljKcd5HFv25pxuJoy7gSk38-GaoNV88UiDV9nmlsv4f-Q1SeKayQVURDUL-LDmMsEdE9PAQN3CwuyeiM4wTuBzU=w118-h67-no" style="width: 30%;">
+      <img src="' . $image . '" style="width: 30%;">
       </p>
       </td>
       </tr>

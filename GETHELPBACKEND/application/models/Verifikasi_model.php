@@ -42,10 +42,18 @@ class Verifikasi_model extends CI_Model
         $this->db->insert('organisasi', $data);
     }
 
-    public function updatestatus($userid)
+    public function updatejenisakun($userid, $jenis = '')
     {
-        $this->db->set('verifikasi', 2);
-        $this->db->where('users.id', $userid);
-        $this->db->update('users');
+        if ($jenis != '') {
+            $this->db->set('id_jenisakun', $jenis);
+            $this->db->set('verifikasi', 2);
+            $this->db->where('users.id', $userid);
+            $this->db->update('users');
+        } else {
+
+            $this->db->set('verifikasi', 2);
+            $this->db->where('users.id', $userid);
+            $this->db->update('users');
+        }
     }
 }

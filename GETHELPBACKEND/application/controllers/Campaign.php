@@ -26,6 +26,9 @@ class Campaign extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->session->unset_userdata('kategori');
+        $this->session->unset_userdata('keyword');
+        $this->session->unset_userdata('cariuser');
         $this->load->library('form_validation');
         $this->load->model('campaign_model');
         $this->load->model('users_model');
@@ -51,8 +54,7 @@ class Campaign extends CI_Controller
 
         if ($fundraiser) {
             $data['cariuser'] = $fundraiser;
-            $this->session->unset_userdata('kategori');
-            $this->session->unset_userdata('keyword');
+
             $this->session->set_userdata('cariuser', $data['cariuser']);
         } else {
             $data['cariuser'] = $this->session->userdata('cariuser');

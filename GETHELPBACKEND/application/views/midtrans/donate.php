@@ -34,7 +34,7 @@
                           <?= $detail['dibuat']; ?> &nbsp;
                         </a>
                         <div class="progress" data-toggle="tooltip" data-bs-tooltip="" style="height: 5px;">
-                          <div class="progress-bar progress-bar-striped progress-bar-animated" aria-valuenow="7" aria-valuemin="0" aria-valuemax="100" style="width: 7%;">&nbsp;</div>
+                          <div class="progress-bar progress-bar-striped progress-bar-animated" aria-valuenow="7" aria-valuemin="0" aria-valuemax="100" style="width: <?= (int)$detail['donasi_terkumpul'] / (int)$detail['target_donasi'] * 100 ?>%;">&nbsp;</div>
                         </div>
                         <div class="collected-text">
                           Terkumpul
@@ -55,7 +55,7 @@
                 </div>
 
                 <div class="form-group mt-4">
-                  <label for="nominal">Pilih Nominal Donasi
+                  <label for="nominal">Masukkan Nominal Donasi
                     <span class="text-danger">*</span>
                   </label>
                   <div class="form-group mb-3">
@@ -80,7 +80,7 @@
                     <span class="text-danger">*</span>
                   </label>
                   <input type="text" class="form-control" id="nomor" value="<?= set_value('nomor') ?>" name="nomor">
-                  <?= form_error('nominal', ' <small class="text-danger pl-3">', '</small>'); ?>
+                  <?= form_error('nomor', ' <small class="text-danger pl-3">', '</small>'); ?>
                 </div>
                 <div class="form-group">
                   <label for="alamat-email">Email
@@ -108,7 +108,7 @@
                     <span class="text-danger">*</span>
                   </label>
                   <input type="text" class="form-control" id="nomor" value="<?= set_value('nomor') ?>" name="nomor">
-                  <?= form_error('nominal', ' <small class="text-danger pl-3">', '</small>'); ?>
+                  <?= form_error('nomor', ' <small class="text-danger pl-3">', '</small>'); ?>
                 </div>
                 <div class="form-group">
                   <label for="alamat-email">Email

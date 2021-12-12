@@ -18,6 +18,7 @@ class Home extends CI_Controller
         //hapus session filter data user
         $this->session->unset_userdata('kategori');
         $this->session->unset_userdata('keyword');
+        $this->session->unset_userdata('cariuser');
         //hapus session jenis akun
         $this->session->unset_userdata('jenis-akun');
 
@@ -130,7 +131,6 @@ class Home extends CI_Controller
             'charset'   => 'utf-8',
             'newline'   => "\r\n"
         ];
-
 
 
         $this->load->library('email', $config);

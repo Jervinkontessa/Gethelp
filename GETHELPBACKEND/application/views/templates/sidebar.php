@@ -54,7 +54,7 @@
 
 
                     <!-- Nav Item - Utilities Collapse Menu -->
-                    <?php if ($title == 'Data Campaign Yang Sedang Berjalan' || $title == 'Data Transaksi Yang Berhasil' || $title == 'Data Campaign telah selesai' || $title == 'Detail Pending Campaign' || $title == 'Request Donasi') : ?>
+                    <?php if ($title == 'Data Campaign Yang Sedang Berjalan' || $title == 'Data Laporan Yang Masuk' || $title == 'Data Campaign telah selesai' || $title == 'Detail Pending Campaign' || $title == 'Request Donasi') : ?>
                         <li class="nav-item active">
                         <?php else : ?>
                         <li class="nav-item">
@@ -67,7 +67,7 @@
                             <div class="bg-white py-2 collapse-inner rounded">
                                 <h6 class="collapse-header">Campaign Management</h6>
                                 <a class="collapse-item" href="<?= base_url('donasi') ?>">Data Donasi</a>
-                                <a class="collapse-item" href="<?= base_url('donasi/transaksi') ?>">Data Transaksi</a>
+                                <a class="collapse-item" href="<?= base_url('donasi/report') ?>">Data Laporan Masuk</a>
                                 <a class="collapse-item" href="<?= base_url('donasi/selesai') ?>">Data Donasi Telah Selesai</a>
                                 <a class="collapse-item" href="<?= base_url('donasi/pending') ?>">Pengajuan Donasi</a>
                             </div>
@@ -83,7 +83,7 @@
                         </div>
 
                         <!-- Nav Item - Tables -->
-                        <?php if ($title == 'Daftar Users' || $title == 'Detail Users') : ?>
+                        <?php if ($title == 'Daftar Users') : ?>
                             <li class="nav-item active">
                             <?php else : ?>
                             <li class="nav-item">
@@ -92,8 +92,6 @@
                                 <i class="fas fa-fw fa-users"></i>
                                 <span>Users Management</span></a>
                             </li>
-                            <!-- Nav Item - Tables -->
-
 
                             <!-- Divider -->
                             <hr class="sidebar-divider d-none d-md-block">

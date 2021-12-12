@@ -56,7 +56,7 @@ class Donasi_model extends CI_Model
     {
 
         if ($slug != '') {
-            $this->db->select('campaign.campaign_id, category.nama As cnama,users.nama,campaign.nama_campaign,slug,campaign.users_id,target_donasi, campaign.tanggal_dibuat,tanggal_berakhir, donasi_terkumpul, campaign.gambar,users.verifikasi, campaign.cerita');
+            $this->db->select('campaign.campaign_id, category.nama As cnama,users.nama,email,campaign.nama_campaign,slug,campaign.users_id,target_donasi, campaign.tanggal_dibuat,tanggal_berakhir, donasi_terkumpul, campaign.gambar,users.verifikasi, campaign.cerita, campaign.tujuan, campaign.penerima_donasi, rincian');
 
             $this->db->join('users', 'campaign.users_id = users.id');
             $this->db->join('category', 'campaign.category_id = category.id');
@@ -98,11 +98,11 @@ class Donasi_model extends CI_Model
         $where = '3';
         $this->db->where('campaign.status', $where);
         $query = $this->db->get('campaign');
-        return $query->result_array();
+        return $query->row_array();
     }
 
 
-    public function terimadonasi($id, $status)
+    public function ubahstatusdonasi($id, $status)
     {
         $this->db->set('status', $status);
         $this->db->where('campaign_id', $id);
@@ -206,6 +206,27 @@ class Donasi_model extends CI_Model
     {
         $this->db->where('slug', $slug);
         $this->db->delete('campaign');
+    }
+
+    public function getlaporan($id = '')
+    {
+        if ($id != '') {
+            $this->db->select('*');
+            $this->db->join('campaign ', 'ON campaign.campaign_id = report.campaign_id');
+            $this->db->where('report.id', $id);
+            $query = $this->db->get('report');
+            return $query->row_array();
+        }
+        $this->db->select('*');
+        $this->db->join('campaign ', 'ON campaign.campaign_id = report.campaign_id');
+        $query = $this->db->get('report');
+        return $query->result_array();
+    }
+
+    public function deletelaporan($id)
+    {
+        $this->db->where('id', $id);
+        $this->db->delete('report');
     }
 
     // data transaksi midtrans mulai dari sini

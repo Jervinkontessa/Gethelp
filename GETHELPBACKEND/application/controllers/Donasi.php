@@ -21,18 +21,21 @@ class Donasi extends CI_Controller
 
         $data['donasihabis'] = $this->donasi_model->getdonasiyanghabismasanya();
         $data['donasiditolak'] = $this->donasi_model->getdonasiditolak();
+
+        // var_dump($data['donasiditolak']);
+        // die;
         $data['category'] = $this->donasi_model->getcategory();
         $tgl = date('Y-m-d');
-        $lama = 4;
-        $where = "datediff(current_date(), tanggal_dibuat) >'" . $lama . "'";
+        // $lama = 4;
+        // $where = "datediff(current_date(), tanggal_dibuat) >'" . $lama . "'";
 
 
-        if ($data['donasiditolak']) {
+        if ($data['donasiditolak'] != '') {
 
-            unlink(FCPATH . 'assets/img/donasithumb/' . $data['donasiditolak']['gambar']);
-            $this->db->where($where);
+
             $this->db->where('status', 3);
             $this->db->delete('campaign');
+            unlink(FCPATH . 'assets/img/donasithumb/' . $data['donasiditolak']['gambar']);
         }
 
         if ($data['donasihabis'] != '') {
@@ -93,7 +96,10 @@ class Donasi extends CI_Controller
                 $this->donasi_model->insertnewcampaign($slug, $namacampaign, $tanggalberakhir, $targetdonasi, $cerita, $bukti, $category_id);
 
                 $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-             Campaign baru berhasil ditambahkan</div>');
+             Campaign baru berhasil ditambahkan
+             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+         </button></div>');
                 redirect('donasi');
             }
         } else {
@@ -187,13 +193,20 @@ class Donasi extends CI_Controller
                 $this->donasi_model->updatecampaign($slug, $namacampaign, $tanggalberakhir, $targetdonasi, $cerita, $gambar, $category_id, $status, $jumlahdicairkan);
 
                 $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-             Data Campaign berhasil diupdate</div>');
+             Data Campaign berhasil diupdate
+             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+         </button>
+             </div>');
                 redirect('donasi');
             } else {
                 $this->donasi_model->updatecampaign($slug, $namacampaign, $tanggalberakhir, $targetdonasi, $cerita, $gambar, $category_id, $status, $jumlahdicairkan);
 
                 $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-             Data Campaign berhasil diupdate</div>');
+             Data Campaign berhasil diupdate
+             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+         </button></div>');
                 redirect('donasi');
             }
         } else {
@@ -252,7 +265,10 @@ class Donasi extends CI_Controller
                 $kabarimg = $this->upload->data('file_name');
                 $this->donasi_model->insertkabar($cid, $keterangan, $datenow, $kabarimg);
                 $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-             kabar Campaign berhasil ditambahkan</div>');
+             kabar Campaign berhasil ditambahkan
+             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+         </button></div>');
                 redirect('donasi');
             }
         } else {
@@ -267,15 +283,21 @@ class Donasi extends CI_Controller
 
     public function delete($slug)
     {
-        $data['donasi'] = $this->donasi_model->getdonasiygaktif($slug);
+        $data['donasi'] = $this->donasi_model->getalldonasi($slug);
 
         $this->load->library('upload');
         $oldimage = $data['donasi']['gambar'];
-        unlink(FCPATH . 'assets/img/donasithumb/' . $oldimage);
 
+        // var_dump($oldimage);
+        // die;
+        unlink(FCPATH . 'assets/img/donasithumb/' . $oldimage);
         $this->donasi_model->delete($slug);
+
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-            Data Berhasil dihapus</div>');
+            Data Berhasil dihapus
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button></div>');
         redirect('donasi');
     }
 
@@ -322,19 +344,44 @@ class Donasi extends CI_Controller
     }
 
 
-    // data transaksi midtrans mulai disini
-    public function transaksi()
-    {
-        $data['title'] = "Data Transaksi Yang Berhasil";
-        $data['user'] = $this->users_model->getuserlogin($this->session->userdata('admin_data'));
-        $data['transaksi'] = $this->donasi_model->gettransaksi();
 
+    public function report()
+    {
+        $data['title'] = "Data Laporan Yang Masuk";
+        $data['user'] = $this->users_model->getuserlogin($this->session->userdata('admin_data'));
+        $data['laporan'] = $this->donasi_model->getlaporan();
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
-        $this->load->view('donasi/datatransaksi', $data);
+        $this->load->view('donasi/datalaporan', $data);
         $this->load->view('templates/footer');
+    }
+
+    public function reportdelete($id)
+    {
+        $data['laporan'] = $this->donasi_model->getlaporan($id);
+
+        $oldimage = $data['laporan']['foto_bukti'];
+        unlink(FCPATH . 'assets/img/buktilaporan/' . $oldimage);
+
+        $this->donasi_model->deletelaporan($id);
+
+
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+            Data Berhasil dihapus
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button></div>');
+        redirect('donasi/report');
+    }
+
+    public function download($filename)
+    {
+        $folder = 'assets/img/buktilaporan/';
+
+
+        force_download($folder . $filename, NULL);
     }
 
     public function pending()
@@ -357,18 +404,141 @@ class Donasi extends CI_Controller
         $data['donasi'] = $this->donasi_model->getdonasipending($slug);
         $data['category'] = $this->donasi_model->getcategory();
 
-        $status = $this->input->post('status');
-        $id = $this->input->post('id');
+        $email = $data['donasi']['email'];
+        $slug = $data['donasi']['slug'];
+        // var_dump($data['donasi']);
+        // die;
+        $this->form_validation->set_rules('status', 'Status', 'required', [
+            'required' => 'wajib di pilih'
+        ]);
 
-        $this->donasi_model->terimadonasi($id, $status);
-        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-        Campaign Status Diubah</div>');
-        redirect('donasi/pending');
 
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar', $data);
-        $this->load->view('templates/topbar', $data);
-        $this->load->view('donasi/pendingdetail', $data);
-        $this->load->view('templates/footer');
+        if ($this->form_validation->run() == true) {
+            $namacampaign = $this->input->post('namacampaign');
+            $status = $this->input->post('status');
+            $id  = $this->input->post('id');
+            $pembuat = $this->input->post('pembuat');
+
+            // var_dump($status);
+            // die;
+            if ($status == '1') {
+                $this->donasi_model->ubahstatusdonasi($id, $status);
+                $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+                Status campaign berhasil diubah
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button></div>');
+                $this->_sendemail($pembuat, $email, $namacampaign, $slug, 'diterima');
+                redirect('donasi/pending');
+            } elseif ($status == '2') {
+                redirect('donasi/pending');
+            } else {
+                $this->donasi_model->ubahstatusdonasi($id, 3);
+                $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+                Status campaign berhasil diubah
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button></div>');
+                $this->_sendemail($pembuat, $email, $namacampaign, $slug, 'ditolak');
+                redirect('donasi/pending');
+            }
+        } else {
+
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('donasi/pendingdetail', $data);
+            $this->load->view('templates/footer');
+        }
+    }
+
+
+
+    private function _sendemail($username, $to, $campaign, $slug, $type)
+    {
+        $config = [
+            'protocol'  => 'smtp',
+            'smtp_host' => 'ssl://smtp.googlemail.com',
+            'smtp_user' => 'gethelp.startup@gmail.com',
+            'smtp_pass' => 'k&1DZNpl',
+            'smtp_port' =>  465,
+            'mailtype'  => 'html',
+            'charset'   => 'utf-8',
+            'newline'   => "\r\n"
+        ];
+
+        $url = base_url('campaign/') . $slug;
+        $image = base_url('assets/img/logo.png');
+        $this->load->library('email', $config);
+        $this->email->initialize($config);
+
+
+        $this->email->from('gethelp.startup@gmail.com', 'GetHelp');
+        $this->email->to($to);
+
+
+        $this->email->subject('Status request galana dana');
+
+        if ($type == 'diterima') {
+
+            $this->email->message('
+                <table width="100%" bgcolor="#ffffff" border="0" cellpadding="10" cellspacing="0" align="center"> 
+            <tbody>
+              <td align="center">
+                <table>
+                  <tbody>
+                    <tr>
+                      <td valign="top">
+            <h3>Hi, ' . $username . '</h3>
+      <p>kami ingin mengabari anda tentang status</p>
+      <p>Galang dana yang anda buat <b>' . $campaign . '</b>
+      Kami telah mengaktifkan galang dana anda.</p>
+      <p>anda bisa mengunjungi campaign anda <a href="' . $url . '" target="_blank">disini</a></p>
+      <p>Hormat kami,</p>
+      <p style="margin-bottom:10px">
+      <img src="' . $image . '" style="width: 30%;">
+      </p>
+      </td>
+      </tr>
+      </tbody>
+      </table>
+      </td>
+      </tbody>
+          </table>
+                ');
+        } else {
+            $this->email->message('
+                <table width="100%" bgcolor="#ffffff" border="0" cellpadding="10" cellspacing="0" align="center"> 
+            <tbody>
+              <td align="center">
+                <table>
+                  <tbody>
+                    <tr>
+                      <td valign="top">
+            <h3>Hi, ' . $username . '</h3>
+            <p>kami ingin mengabari anda tentang status</p>
+            <p>Galang dana yang anda buat <b>' . $campaign . '</b>
+            Kami tidak bisa mengaktifkan galang dana anda.</p>
+            <p>Hal ini bisa terjadi karena data campaign kurang jelas atau campaign anda memiliki data yang tidak valid, harap cek kembali data campaign anda</p>
+      <p>Hormat kami,</p>
+      <p style="margin-bottom:10px">
+      <img src="' . $image . '" style="width: 30%;">
+      </p>
+      </td>
+      </tr>
+      </tbody>
+      </table>
+      </td>
+      </tbody>
+          </table>
+                ');
+        }
+
+        if ($this->email->send()) {
+            return true;
+        } else {
+            echo $this->email->print_debugger();
+            die;
+        }
     }
 }

@@ -52,14 +52,14 @@
 
                                         <td class="text-center">
                                             <?php
-                                            if ($adm['verifikasi'] != 1 && $adm['verifikasi'] != 2) {
+                                            if ($adm['verifikasi'] == 0) {
                                             ?>
                                                 <span class="badge bg-danger text-white">Belum Verifikasi</span>
 
                                             <?php
-                                            } elseif ($adm['verifikasi'] != 1 && $adm['verifikasi'] != 0) {
+                                            } elseif ($adm['verifikasi'] == 2) {
                                             ?>
-                                                <span class="badge bg-success text-white">Butuh diproses</span>
+                                                <span class="badge bg-warning text-white">Pending</span>
                                             <?php
                                             } else {
                                             ?>
@@ -127,13 +127,14 @@
                 <div class="modal-body">
                     <input type="hidden" readonly name="user_id" class="form-control" id="user_id">
 
+
                     <div class="form-group">
                         <label for="password">Nama Users</label>
-                        <input type="text" class="form-control" id="namauser" name="nama" readonly>
+                        <input type="text" class="form-control" id="namauser" name="namauser" readonly>
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="text" class="form-control" id="emailuser" name="email" readonly>
+                        <input type="text" class="form-control" id="emailuser" name="emailuser" readonly>
                     </div>
                     <div class="form-group">
                         <label for="status">Ubah Status</label>
@@ -142,10 +143,12 @@
                             <option value="0">Inactive/Blokir</option>
                         </select>
                     </div>
+
                     <div class="form-group">
                         <label for="verifikasi">Verifikasi Akun</label>
                         <select name="verifikasi" id="verifikasi" class="form-control verifikasi">
-                            <option value="1">Terverifikasi</option>
+                            <option value="2">Pending</option>
+                            <option value="1">Verifikasi User</option>
                             <option value="0">Belum Verifikasi</option>
                         </select>
                     </div>
