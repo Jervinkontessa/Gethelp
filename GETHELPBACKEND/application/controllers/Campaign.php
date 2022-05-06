@@ -39,7 +39,7 @@ class Campaign extends CI_Controller
     public function index()
     {
         $data['user'] = $this->users_model->getuserlogin($this->session->userdata('user_data'));
-        $data['title'] = 'Mulai Galang Dana - GetHelp';
+        $data['title'] = 'Mulai Berdonasi - GetHelp';
         $data['category'] = $this->donasi_model->getcategory();
 
 
@@ -119,6 +119,16 @@ class Campaign extends CI_Controller
             $config['total_rows'] = $this->db->count_all_results();
             $config['per_page'] = 3;
             $data['total_baris'] =  $config['total_rows'];
+        } elseif ($kategori != '') {
+            $this->db->join('category', 'campaign.category_id = category.id');
+            $where = '3';
+            $this->db->where('campaign.status !=', $where);
+            $this->db->where('campaign.status !=', '2');
+            $this->db->where('category.nama', $data['kategori']);
+            $this->db->from('campaign');
+            $config['total_rows'] = $this->db->count_all_results();
+            $config['per_page'] = 3;
+            $data['total_baris'] =  $config['total_rows'];
         } else {
             $this->db->join('category', 'campaign.category_id = category.id');
             $where = '3';
@@ -142,6 +152,7 @@ class Campaign extends CI_Controller
         $data['start'] = $this->uri->segment(2);;
         $data['campaign'] = $this->campaign_model->getcampaign($config['per_page'], $data['start'],  $data['kategori'], $data['keyword'], $data['cariuser']);
 
+
         $this->load->view('templates/home_header', $data);
         $this->load->view('templates/home_topbar', $data);
         $this->load->view('home/list-campaign', $data);
@@ -154,10 +165,16 @@ class Campaign extends CI_Controller
 
         $data['detail'] = $this->campaign_model->detailcampaign($slug);
 
+        //jika parameter slug campaign salah atau tidak ditemukan
+        if ($data['detail'] == null) {
+            redirect('404_override');
+        }
+
         $data['title'] =  $data['detail']['nama_campaign'];
         $data['update'] = $this->campaign_model->getcampaignupdatebyid($data['detail']['campaign_id']);
         $data['donatur'] = $this->campaign_model->getdonatur($data['detail']['campaign_id'], 5);
-        $data['donaturmodal'] = $this->campaign_model->getdonatur($data['detail']['campaign_id'], 10);
+        $data['doacmp'] = $this->campaign_model->getdoacampaign($data['detail']['campaign_id'], 5);
+        $data['donaturmodal'] = $this->campaign_model->getdonatur($data['detail']['campaign_id'], 10, 1);
         $data['jumlahdonatur'] = $this->campaign_model->getjumlahdonatur($data['detail']['campaign_id']);
         $data['jumlahupdate'] = $this->campaign_model->getjumlahupdate($data['detail']['campaign_id']);
         $data['doa'] = $this->campaign_model->getdonatur($data['detail']['campaign_id'], 4);
@@ -265,22 +282,24 @@ class Campaign extends CI_Controller
     {
         $config = [
             'protocol'  => 'smtp',
-            'smtp_host' => 'ssl://smtp.googlemail.com',
-            'smtp_user' => 'gethelp.startup@gmail.com',
-            'smtp_pass' => 'k&1DZNpl',
-            'smtp_port' =>  465,
+            'smtp_host' => 'mail.gethelpid.com',
+            'smtp_user' => 'support@gethelpid.com',
+            'smtp_crypto' => 'ssl',
+            'smtp_pass' => '4bZ1Tz-8s!iAU1',
+            'smtp_port' => 465,
             'mailtype'  => 'html',
             'charset'   => 'utf-8',
             'newline'   => "\r\n"
+
         ];
 
-
+        $image = base_url('assets/img/logo.png');
 
         $this->load->library('email', $config);
         $this->email->initialize($config);
 
 
-        $this->email->from('gethelp.startup@gmail.com', 'GetHelp');
+        $this->email->from('support@gethelpid.com', 'GetHelp');
         $this->email->to($to);
 
 
@@ -300,7 +319,7 @@ class Campaign extends CI_Controller
       jika ditemukan pelanggaran yang dilakukan pada campaign ini.</p>
       <p>Hormat kami,</p>
       <p style="margin-bottom:10px">
-      <img src="https://lh3.googleusercontent.com/8c0W8_Zk38CPBivX5kGKBnlTGTBoLqXyT-eJ9G58v-l0dt4ko1x7P_5XlvTb8MN7EImf9FZWfwH4_A3G4JiwOwJ2QY0MC_3b98u6HkvVMNv2krWxqgMQrHbL0-gNTR7b02S09W0M3LsrHJRESxNFCvL6RUv5W941OKSMHZxr8nUUqY_d5AoL6lmCt7CNsLifR6hVNKjy_2WjCaJ1FxRq8HJ26DZ4fc2yVhVz9vM46GgSR-YWTyOSXnyApBQDdaQ3UhWvBhUdarUsiJHj7NkaH5mnV52_8NLVlfV4rtAr095wpsVtxCir9Bq_sSLEYjqkXTue7u3LBXUouN-c93jyYwOGB7qofpGQtOa0TTSx3NC6i42HeiLGnhVrNSxH32s3SgW7ujfMIkIqfuKs9sxmyE48GtUz_LjkNyQb5AO084SzTnta8lauza7IOy4DaOorinU6yo8rSjRShC1f3YdPthR7Eq_KA8j5UeNccOul1rqz7UyVubjnpb4AMv3aI4K7YpHMKkCZh_MbtZVtLZyD_kghS8Pbsh9tr9TiJ7my6v886n1K_1IQo63bhU1zZNJWkxi8eN5hF3Q9SA4uQ6hiZe48PeC87wHvzW8xl9IBPRv_HyRHzlYctuKRSE2s-xAKljKcd5HFv25pxuJoy7gSk38-GaoNV88UiDV9nmlsv4f-Q1SeKayQVURDUL-LDmMsEdE9PAQN3CwuyeiM4wTuBzU=w118-h67-no" style="width: 30%;">
+      <img src="' . $image . '" style="width: 30%;">
       </p>
       </td>
       </tr>

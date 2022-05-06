@@ -2,9 +2,16 @@
 <html lang="en">
 
 <head>
+    <title></title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="title" content="gethelpid.com">
+    <meta name="description" content="Website donasi online untuk mempermudah dalam hal berdonasi dengan beragam metode pembayaran ">
+    <meta name="keywords" content="donasi,gethelpid,bantu,hidup untuk berbagi">
+    <meta name="robots" content="index, follow">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta content='id' name='language' />
     <title><?= $title ?></title>
     <!-- Fontawesome CDN-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">

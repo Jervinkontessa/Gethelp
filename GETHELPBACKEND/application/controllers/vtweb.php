@@ -23,7 +23,7 @@ class Vtweb extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$params = array('server_key' => 'SB-Mid-server-DGabmpeRxgPckTaOxK8j6FVv', 'production' => false);
+		$params = array('server_key' => 'Mid-server-lTpC01wPeDXqrbnYpriBwhx_', 'production' => false);
 		$this->load->library('veritrans');
 		$this->veritrans->config($params);
 		$this->load->helper('url');
@@ -150,7 +150,7 @@ class Vtweb extends CI_Controller
 	public function notification()
 	{
 		$json_result = file_get_contents('php://input');
-		$result = json_decode($json_result, true);
+		$result = json_decode($json_result, "true");
 
 		// if ($result) {
 		// 	$notif = $this->veritrans->status($result['order_id']);
@@ -159,42 +159,52 @@ class Vtweb extends CI_Controller
 		// // error_log(print_r($result, TRUE));
 
 		//notification handler sample
-
-		$transaction = $result['transaction_status'];
-		$order_id = $result['order_id'];
-		$status_code =  $result['status_code'];
-
-		if ($transaction == 'settlement') {
-			// TODO set payment status in merchant's database to 'Settlement'
-			$data = [
-				'status_code' => $status_code
-			];
-			$this->db->where('order_id', $order_id);
-			$this->db->update('transaksi_midtrans', $data);
-			// echo "Transaction order_id: " . $order_id . " successfully transfered using " . $type;
-		} else if ($transaction == 'pending') {
-			// TODO set payment status in merchant's database to 'Pending'
-			$data = [
-				'order_id' => $result['order_id'],
-				'campaign_id' => $result['custom_field1'],
-				'nama' => $result['custom_field2'],
-				'gross_amount' => $result['gross_amount'],
-				'payment_type' => $result['payment_type'],
-				'transaction_time' => $result['transaction_time'],
-				'va_number' => $result['va_numbers'][0]['va_number'],
-				'status_code' => $status_code,
-				'doa' => $result['custom_field3']
-			];
-			$this->db->insert('transaksi_midtrans', $data);
-			// echo "Waiting customer to finish transaction order_id: " . $order_id . " using " . $type;
-		} else if ($transaction == 'expire') {
-			// TODO set payment status in merchant's database to 'Pending'
-			$this->db->where('order_id', $order_id);
-			$this->db->delete('transaksi_midtrans');
-			// echo "Waiting customer to finish transaction order_id: " . $order_id . " using " . $type;
+		if ($result) {
+			$transaction = $result['transaction_status'];
+			$order_id = $result['order_id'];
+			$status_code =  $result['status_code'];
+			if ($result['va_numbers'][0]['va_number']) {
+				$va_number = $result['va_numbers'][0]['va_number'];
+				// untuk transfer dengan virtual akun
+			} else {
+				$va_number = 0;
+			}
+			if ($result['custom_field3']) {
+				$doa = $result['custom_field3'];
+			} else {
+				$doa = '';
+			}
+			if ($transaction == 'settlement') {
+				// TODO set payment status in merchant's database to 'Settlement'
+				$data = [
+					'status_code' => $status_code
+				];
+				$this->db->where('order_id', $order_id);
+				$this->db->update('transaksi_midtrans', $data);
+				// echo "Transaction order_id: " . $order_id . " successfully transfered using " . $type;
+			} else if ($transaction == 'pending') {
+				// TODO set payment status in merchant's database to 'Pending'
+				$data = [
+					'order_id' => $result['order_id'],
+					'campaign_id' => $result['custom_field1'],
+					'nama' => $result['custom_field2'],
+					'gross_amount' => $result['gross_amount'],
+					'payment_type' => $result['payment_type'],
+					'transaction_time' => $result['transaction_time'],
+					'va_number' => $result['va_numbers'][0]['va_number'],
+					'status_code' => $status_code,
+					'doa' => $doa
+				];
+				$this->db->insert('transaksi_midtrans', $data);
+				// echo "Waiting customer to finish transaction order_id: " . $order_id . " using " . $type;
+			} else if ($transaction == 'expire') {
+				// TODO set payment status in merchant's database to 'Pending'
+				$this->db->where('order_id', $order_id);
+				$this->db->delete('transaksi_midtrans');
+				// echo "Waiting customer to finish transaction order_id: " . $order_id . " using " . $type;
+			}
 		}
 	}
-
 
 	public function finish()
 	{

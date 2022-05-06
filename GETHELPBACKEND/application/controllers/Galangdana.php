@@ -134,24 +134,35 @@ class Galangdana extends CI_Controller
 
     private function _sendemail($username, $to)
     {
+        // $config = [
+        //     'protocol'  => 'smtp',
+        //     'smtp_host' => 'ssl://smtp.googlemail.com',
+        //     'smtp_user' => 'gethelp.startup@gmail.com',
+        //     'smtp_pass' => 'k&1DZNpl',
+        //     'smtp_port' =>  465,
+        //     'mailtype'  => 'html',
+        //     'charset'   => 'utf-8',
+        //     'newline'   => "\r\n"
+        // ];
         $config = [
             'protocol'  => 'smtp',
-            'smtp_host' => 'ssl://smtp.googlemail.com',
-            'smtp_user' => 'gethelp.startup@gmail.com',
-            'smtp_pass' => 'k&1DZNpl',
-            'smtp_port' =>  465,
+            'smtp_host' => 'mail.gethelpid.com',
+            'smtp_user' => 'admin@gethelpid.com',
+            'smtp_crypto' => 'ssl',
+            'smtp_pass' => '4bZ1Tz-8s!iAU1',
+            'smtp_port' => 465,
             'mailtype'  => 'html',
             'charset'   => 'utf-8',
             'newline'   => "\r\n"
-        ];
 
+        ];
 
         $image = base_url('assets/img/logo.png');
         $this->load->library('email', $config);
         $this->email->initialize($config);
 
 
-        $this->email->from('gethelp.startup@gmail.com', 'GetHelp');
+        $this->email->from('admin@gethelpid.com', 'GetHelp');
         $this->email->to($to);
 
 
@@ -166,7 +177,7 @@ class Galangdana extends CI_Controller
                     <tr>
                       <td valign="top">
             <h3>Hi, ' . $username . '</h3>
-      <p>Terima kasih telah mengalang dana di ' . base_url() . ',</p>
+      <p>Terima kasih telah mengalang dana di di <a href= "' . base_url() . '" target="_blank">gethelpid,</a></p>
       <p>Team kami akan melakukan evaluasi data campaign anda</p>
       <p>untuk sekarang status dari campaign anda dalam masa pending/sedang di evaluasi</p>
       <p>Kami akan mengabari status terbaru campaign anda di email anda.</p>

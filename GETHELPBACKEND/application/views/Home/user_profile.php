@@ -84,7 +84,15 @@
                     </div>
                 <?php } else { ?>
                 <?php } ?>
-
+                <?php if (null != $this->session->flashdata('error_msg3')) { ?>
+                    <div class="alert alert-danger mb-2" role="alert">
+                        <?= $this->session->flashdata('error_msg3'); ?>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                <?php } else { ?>
+                <?php } ?>
                 <?php if (null != $this->session->flashdata('message2')) { ?>
                     <div class="alert alert-success mb-2" role="alert">
                         <?= $this->session->flashdata('message2'); ?>

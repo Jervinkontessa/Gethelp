@@ -89,7 +89,11 @@
                                 </div>
                                 <div class="causes_content">
                                     <div class="details">
-                                        <span class="badge badge-info kat-sosial pull-right"><?= $c['cnama'] ?></span>
+                                        <?php if ($c['status'] == 1) { ?>
+                                            <span class="badge badge-info kat-sosial pull-right"><?= $c['cnama'] ?></span>
+                                        <?php } else { ?>
+                                            <span class="badge badge-info kat-primary pull-right">Selesai</span>
+                                        <?php } ?>
                                         <a href="<?= base_url('campaign/') . $c['slug'] ?>">
                                             <h4>#<?= $c['nama_campaign'] ?></h4>
                                         </a>
@@ -110,7 +114,11 @@
                                             <img src="<?= base_url('assets/img/') ?>verified.png" alt="Donatur Terverifikasi" style="width:15px;height:15px;">
                                         </span>
                                     </div>
-                                    <a class="btn btn-primary btn-donasi" href="<?= base_url('donate/') . $c['slug']; ?>">Donasi</a>
+                                    <?php if ($c['status'] == 1) { ?>
+                                        <a class="btn btn-primary btn-donasi" href="<?= base_url('donate/') . $c['slug']; ?>">Donasi</a>
+                                    <?php } else { ?>
+                                        <a class="btn btn-primary btn-donasi" href="<?= base_url('campaign/') . $c['slug'] ?>">Detail</a>
+                                    <?php } ?>
                                 </div>
                             </div>
                         </div>

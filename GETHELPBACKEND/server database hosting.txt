@@ -1,0 +1,3 @@
+pass mysql server
+user gethelpi_admin 
+pass UR7_PFRDfPV_nNf

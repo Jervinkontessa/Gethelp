@@ -7,6 +7,7 @@ class Users_model extends CI_Model
     {
         $this->db->select(' COUNT(*) AS total');
         $this->db->where('status', 1);
+        $this->db->where('role', 'user');
         $query = $this->db->get('users');
         return $query->result_array();
     }

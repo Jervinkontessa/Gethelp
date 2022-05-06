@@ -205,28 +205,28 @@ class Usersprofile extends CI_Controller
 
         if ($data['user']['password'] != '') {
             $this->form_validation->set_rules('passsekarang', 'Passsekarang', 'required|trim|min_length[8]|matches[repeatpass]', [
-                'required' => 'Password sekarang wajib harus ada',
+                'required' => 'Form password sekarang wajib harus ada',
                 'min_length' => 'Password terlalu pendek'
             ]);
             $this->form_validation->set_rules('passbaru', 'Passbaru', 'required|trim|min_length[8]', [
-                'min_length' => 'Password terlalu pendek',
-                'required' => 'Password sekarang wajib harus ada',
+                'min_length' => 'Form password baru terlalu pendek',
+                'required' => 'Password baru wajib harus ada',
             ]);
             $this->form_validation->set_rules('repeatpass', 'repeatpass', 'min_length[8]|required|matches[passbaru]', [
                 'min_length' => 'Password terlalu pendek',
-                'required' => 'Form Wajib Diisi',
-                'matches' => 'Form ini harus sama dengan form password baru'
+                'required' => 'Form konfirmasi password baru Wajib Diisi',
+                'matches' => 'Password baru harus sama dengan form konfirmasi password baru'
             ]);
         } else {
             $this->form_validation->set_rules('password1', 'password1', 'min_length[8]|required|matches[password1]', [
                 'min_length' => 'Password terlalu pendek',
-                'required' => 'Form Wajib Diisi',
+                'required' => 'Form password Wajib Diisi',
                 'matches' => 'Form ini harus sama dengan form password baru'
             ]);
             $this->form_validation->set_rules('password2', 'password2', 'min_length[8]|required|matches[password2]', [
                 'min_length' => 'Password terlalu pendek',
-                'required' => 'Form Wajib Diisi',
-                'matches' => 'Form ini harus sama dengan form password baru'
+                'required' => 'Form konfirmasi password Wajib Diisi',
+                'matches' => 'Form password harus sama dengan form konfirmasi password'
             ]);
         }
 
@@ -242,7 +242,16 @@ class Usersprofile extends CI_Controller
                 redirect('usersprofile');
             }
         } else {
-            redirect('usersprofile');
+            if (form_error('passsekarang', ' <span class="pl-3">', '</span>') != null) {
+                $this->session->set_flashdata('error_msg', form_error('passsekarang', ' <span class="pl-3">', '</span>'));
+                $this->session->set_flashdata('error_msg2', form_error('passbaru', ' <span class="pl-3">', '</span>'));
+                $this->session->set_flashdata('error_msg3', form_error('repeatpass', ' <span class="pl-3">', '</span>'));
+                redirect('usersprofile');
+            } else {
+                $this->session->set_flashdata('error_msg', form_error('password1', ' <span class="pl-3">', '</span>'));
+                $this->session->set_flashdata('error_msg2', form_error('password2', ' <span class="pl-3">', '</span>'));
+                redirect('usersprofile');
+            }
         }
     }
     public function verifikasi()
@@ -295,9 +304,8 @@ class Usersprofile extends CI_Controller
         $email = $data['user']['email'];
 
 
-        $this->form_validation->set_rules('nama', 'Nama', 'required|is_unique[biodata.nama_lengkap]', [
+        $this->form_validation->set_rules('nama', 'Nama', 'required', [
             'required' => '*Nama wajib di isi!',
-            'is_unique' => '*Nama Sudah dipakai oleh user lain pastikan nama kamu sama dengan ktp'
         ]);
         $this->form_validation->set_rules('nohp', 'Nohp', 'required|numeric|min_length[12]|is_unique[biodata.phone]', [
             'required' => '*Wajib di isi!',
@@ -411,9 +419,8 @@ class Usersprofile extends CI_Controller
         $email = $data['user']['email'];
 
 
-        $this->form_validation->set_rules('nama', 'Nama', 'required|is_unique[biodata.nama_lengkap]', [
+        $this->form_validation->set_rules('nama', 'Nama', 'required', [
             'required' => '*Nama wajib di isi!',
-            'is_unique' => '*Nama Sudah dipakai oleh user lain pastikan nama kamu sama dengan ktp'
         ]);
         $this->form_validation->set_rules('nohp', 'Nohp', 'required|numeric|min_length[12]|is_unique[biodata.phone]', [
             'required' => '*Wajib di isi!',
@@ -534,7 +541,7 @@ class Usersprofile extends CI_Controller
                             $ktppj = $this->upload->data('file_name');
                             $this->verifikasi_model->masukkan_organisasi($userid, $namapj, $namaorg, $nopj, $ktppj);
                             $this->verifikasi_model->masukkan_biodata($userid, $nama, $alamat, $nohp, $noktp, $bank, $norek, $namaprek, $ktp, $selfie);
-                            $this->verifikasi_model->updatejenisakun($userid, 2);
+                            $this->verifikasi_model->updatejenisakun($userid, '2');
 
                             $this->_sendemail($nama, $email);
                             redirect('user');
@@ -625,13 +632,15 @@ class Usersprofile extends CI_Controller
     {
         $config = [
             'protocol'  => 'smtp',
-            'smtp_host' => 'ssl://smtp.googlemail.com',
-            'smtp_user' => 'gethelp.startup@gmail.com',
-            'smtp_pass' => 'k&1DZNpl',
-            'smtp_port' =>  465,
+            'smtp_host' => 'mail.gethelpid.com',
+            'smtp_user' => 'admin@gethelpid.com',
+            'smtp_crypto' => 'ssl',
+            'smtp_pass' => '4bZ1Tz-8s!iAU1',
+            'smtp_port' => 465,
             'mailtype'  => 'html',
             'charset'   => 'utf-8',
             'newline'   => "\r\n"
+
         ];
         $image = base_url('assets/img/logo.png');
 
@@ -640,7 +649,7 @@ class Usersprofile extends CI_Controller
         $this->email->initialize($config);
 
 
-        $this->email->from('gethelp.startup@gmail.com', 'GetHelp');
+        $this->email->from('admin@gethelpid.com', 'GetHelp');
         $this->email->to($to);
 
 

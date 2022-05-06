@@ -37,11 +37,11 @@ class Auth extends CI_Controller
         include_once APPPATH . "libraries/vendor/autoload.php";
         $google_client = new Google_Client();
 
-        $google_client->setClientId('22017256387-cm08ge081u55qm8p855nj3ptdd6cavdi.apps.googleusercontent.com'); //Define your ClientID
+        $google_client->setClientId('1000357075665-3i9llbnnnlakgkfpbml3acni2o4qrklp.apps.googleusercontent.com'); //Define your ClientID
 
-        $google_client->setClientSecret('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'); //Define your Client Secret Key
+        $google_client->setClientSecret('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'); //Define your Client Secret Key
 
-        $google_client->setRedirectUri('http://localhost/GETHELPBACKEND/auth/'); //Define your Redirect Uri
+        $google_client->setRedirectUri('http://localhost/GETHELPBACKEND/auth'); //Define your Redirect Uri
 
         $google_client->addScope('email');
 
@@ -174,11 +174,11 @@ class Auth extends CI_Controller
         include_once APPPATH . "libraries/vendor/autoload.php";
         $google_client = new Google_Client();
 
-        $google_client->setClientId('22017256387-cm08ge081u55qm8p855nj3ptdd6cavdi.apps.googleusercontent.com'); //Define your ClientID
+        $google_client->setClientId('1000357075665-3i9llbnnnlakgkfpbml3acni2o4qrklp.apps.googleusercontent.com'); //Define your ClientID
 
-        $google_client->setClientSecret('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'); //Define your Client Secret Key
+        $google_client->setClientSecret('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'); //Define your Client Secret Key
 
-        $google_client->setRedirectUri('http://localhost/GETHELPBACKEND/auth/'); //Define your Redirect Uri
+        $google_client->setRedirectUri('http://localhost/GETHELPBACKEND/auth'); //Define your Redirect Uri
 
         $google_client->addScope('email');
 
@@ -280,15 +280,28 @@ class Auth extends CI_Controller
 
     private function _sendemail($username, $to, $type, $token)
     {
+        // $config = [
+        //     'protocol'  => 'smtp',
+        //     'smtp_host' => 'ssl://smtp.googlemail.com',
+        //     'smtp_user' => 'gethelp.startup@gmail.com',
+        //     'smtp_pass' => 'k&1DZNpl',
+        //     'smtp_port' =>  465,
+        //     'mailtype'  => 'html',
+        //     'charset'   => 'utf-8',
+        //     'newline'   => "\r\n"
+
+        // ];
         $config = [
             'protocol'  => 'smtp',
-            'smtp_host' => 'ssl://smtp.googlemail.com',
-            'smtp_user' => 'gethelp.startup@gmail.com',
-            'smtp_pass' => 'k&1DZNpl',
-            'smtp_port' =>  465,
+            'smtp_host' => 'mail.gethelpid.com',
+            'smtp_user' => 'admin@gethelpid.com',
+            'smtp_crypto' => 'ssl',
+            'smtp_pass' => '4bZ1Tz-8s!iAU1',
+            'smtp_port' => 465,
             'mailtype'  => 'html',
             'charset'   => 'utf-8',
             'newline'   => "\r\n"
+
         ];
 
         $image = base_url('assets/img/logo.png');
@@ -297,7 +310,7 @@ class Auth extends CI_Controller
         $this->email->initialize($config);
 
 
-        $this->email->from('gethelp.startup@gmail.com', 'GetHelp');
+        $this->email->from('admin@gethelpid.com', 'GetHelp');
         $this->email->to($to);
 
         if ($type == 'verifikasi') {
@@ -314,7 +327,7 @@ class Auth extends CI_Controller
                   <td valign="top">
         <h3>Selamat bergabung, ' . $username . '</h3>
   <p>Terima kasih telah membuat akun di website kami </p>
-  <p>Gethelp.startup adalah sarana digital yang bertujuan untuk memudahkan anda dalam berdonasi
+  <p>gethelpid adalah sarana digital yang bertujuan untuk memudahkan anda dalam berdonasi
     dan membantu para pengalang dana untuk lebih mudah dalam hal mengalang dana secara online.
   </p>
   <p>Silahkan aktivasi akun anda, <b>jangan dibagikan ke orang lain!</b> <a href="' . base_url() . 'auth/verify?email=' . $to . '&token=' . urlencode($token) . '" >Activasi akun</a></p>
@@ -368,10 +381,10 @@ class Auth extends CI_Controller
                   <td valign="top">
         <h3>Selamat bergabung, ' . $username . '</h3>
   <p>Terima kasih telah membuat akun di website kami </p>
-  <p>Gethelp.startup adalah sarana digital yang bertujuan untuk memudahkan anda dalam berdonasi
+  <p>gethelpid adalah sarana digital yang bertujuan untuk memudahkan anda dalam berdonasi
     dan membantu para pengalang dana untuk lebih mudah dalam hal mengalang dana secara online.
   </p>
-  <p>Silahkan login dengan akun anda dan mulailah donasi pertama mu di Gethelp <a href="http://localhost/GETHELPBACKEND/auth">Login</a></p>
+  <p>Silahkan login dengan akun anda dan mulailah donasi pertama mu di gethelpid <a href="' . base_url('auth') . '">Login</a></p>
   <p>Hormat kami,</p>
   <p style="margin-bottom:10px">
   <img src="' . $image . '" style="width: 30%;">

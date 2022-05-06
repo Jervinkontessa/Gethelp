@@ -48,7 +48,7 @@
                             <label for="nama">Nama Lengkap
                                 <span class="text-danger">*</span>
                             </label>
-                            <input type="text" class="form-control" id="nama" name="nama" value="<?= $biodata['nama_lengkap'] ?>" readonly>
+                            <input type="text" class="form-control" id="nama" name="nama" value="<?= set_value('nama') ?>">
                             <?= form_error('nama', ' <small class="text-danger pl-3">', '</small>'); ?>
                         </div>
                         <div class="form-row">
@@ -66,7 +66,7 @@
                                     <label for="nohp">Nomor Handphone
                                         <span class="text-danger">*</span>
                                     </label>
-                                    <input type="text" class="form-control" id="nohp" name="nohp" value="<?= $biodata['phone'] ?>" readonly>
+                                    <input type="text" class="form-control" id="nohp" name="nohp" value="<?= set_value('nohp') ?>">
                                     <?= form_error('nohp', ' <small class="text-danger pl-3">', '</small>'); ?>
                                 </div>
                             </div>

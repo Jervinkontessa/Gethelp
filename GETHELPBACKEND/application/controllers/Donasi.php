@@ -458,13 +458,15 @@ class Donasi extends CI_Controller
     {
         $config = [
             'protocol'  => 'smtp',
-            'smtp_host' => 'ssl://smtp.googlemail.com',
-            'smtp_user' => 'gethelp.startup@gmail.com',
-            'smtp_pass' => 'k&1DZNpl',
-            'smtp_port' =>  465,
+            'smtp_host' => 'mail.gethelpid.com',
+            'smtp_user' => 'admin@gethelpid.com',
+            'smtp_crypto' => 'ssl',
+            'smtp_pass' => '4bZ1Tz-8s!iAU1',
+            'smtp_port' => 465,
             'mailtype'  => 'html',
             'charset'   => 'utf-8',
             'newline'   => "\r\n"
+
         ];
 
         $url = base_url('campaign/') . $slug;
@@ -473,7 +475,7 @@ class Donasi extends CI_Controller
         $this->email->initialize($config);
 
 
-        $this->email->from('gethelp.startup@gmail.com', 'GetHelp');
+        $this->email->from('admin@gethelpid.com', 'GetHelp');
         $this->email->to($to);
 
 

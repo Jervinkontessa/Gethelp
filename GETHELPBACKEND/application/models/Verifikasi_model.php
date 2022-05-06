@@ -50,7 +50,6 @@ class Verifikasi_model extends CI_Model
             $this->db->where('users.id', $userid);
             $this->db->update('users');
         } else {
-
             $this->db->set('verifikasi', 2);
             $this->db->where('users.id', $userid);
             $this->db->update('users');

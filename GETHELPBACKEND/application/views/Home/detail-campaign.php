@@ -134,22 +134,27 @@
                                             <span class="text-muted">Donasi</span>
                                         </li>
                                         <li class="float-left" data-toggle="tooltip" data-original-title="Penggalangan dana akan berakhir pada" style="border-left: 1px solid #989bac;">
-                                            <?php if ($detail['hari_tersisa'] < 0) { ?>
-                                                <span class="font-weight-bold">Telah Selesai</span>
-                                            <?php } else { ?>
+                                            <?php if ($detail['status'] != 0) { ?>
                                                 <span class="font-weight-bold"><?= $detail['hari_tersisa'] ?></span>
                                                 <br>
-
                                                 <span class="text-muted">hari lagi</span>
+                                            <?php } else { ?>
+                                                <span class="font-weight-bold">Telah Selesai</span>
                                             <?php } ?>
 
                                         </li>
                                     </ul>
                                     <div class="clearfix"></div>
                                 </div>
-                                <a href="<?= base_url('donate/') . $detail['slug'] ?>" class="btn btn-primary btn-block">Donasi
-                                    <i class="far fa-handshake ml-1" aria-hidden="true" style="font-size:19px;"></i>
-                                </a>
+                                <?php if ($detail['status'] != 0) { ?>
+                                    <a href="<?= base_url('donate/') . $detail['slug'] ?>" class="btn btn-primary btn-block">Donasi
+                                        <i class="far fa-handshake ml-1" aria-hidden="true" style="font-size:19px;"></i>
+                                    </a>
+                                <?php } else { ?>
+                                    <span class="btn btn-primary btn-block">Donasi Ditutup
+                                        <i class="far fa-handshake ml-1" aria-hidden="true" style="font-size:19px;"></i>
+                                    </span>
+                                <?php } ?>
                                 <button type="button" class="btn btn-default btn-block" data-toggle="modal" data-target="#socialMediaModal" style="border:1px solid #000;background:#fff;">Bagikan
                                     <i class="fa fa-share ml-1" aria-hidden="true"></i>
                                 </button>
@@ -202,7 +207,7 @@
                                         if ($weeks == 1) {
                                             return "1 minggu yang lalu";
                                         } else {
-                                            return "$weeks weeks ago";
+                                            return "$weeks minggu yang lalu";
                                         }
                                     } else if ($months <= 12) {
                                         if ($months == 1) {
@@ -271,7 +276,12 @@
                 <div class="campaign-detail-box">
                     <div class="info-campaign-detail" style="margin:0px; padding: 10px;">
                         <h3 class="title-campaign"><?= $title; ?>
-                            <span class="badge badge-info kat-sosial pull-right" style="padding: 5px;margin-top:10px;margin-bottom:5px;"><?= $detail['cnama'] ?></span>
+                            <?php if ($detail['status'] == 1) { ?>
+                                <span class="badge badge-info kat-sosial pull-right" style="padding: 5px;margin-top:10px;margin-bottom:5px;"><?= $detail['cnama'] ?></span>
+                            <?php } else { ?>
+                                <span class="badge badge-info kat-primary pull-right">Selesai</span>
+                            <?php } ?>
+
                         </h3>
                         <span class="font-weight-bold"><?= "Rp " . number_format($detail['donasi_terkumpul'], 0, ',', '.'); ?></span>
                         <div class="collected-text">
@@ -293,7 +303,7 @@
                                     <span class="text-muted">Donasi</span>
                                 </li>
                                 <li class="float-left" data-toggle="tooltip" data-original-title="Penggalangan dana akan berakhir pada" style="border-left: 1px solid #989bac;">
-                                    <?php if ($detail['hari_tersisa'] > 0) { ?>
+                                    <?php if ($detail['status'] != 0) { ?>
                                         <strong class="font-weight-bold" style="font-size:1.1em"><?= $detail['hari_tersisa']; ?></strong>
                                         <br>
                                         <span class="text-muted">hari lagi</span>
@@ -312,9 +322,15 @@
                             <button type="button" class="btn btn-default" data-toggle="modal" data-target="#socialMediaModal" style="width: 40%;border:1px solid #000;background:#fff;">Bagikan
                                 <i class="fa fa-share ml-1" aria-hidden="true"></i>
                             </button>
-                            <a href="<?= base_url('donate/') . $detail['slug'] ?>" class="btn btn-primary" style="width: 58%;">Donasi
-                                <i class="far fa-handshake ml-1" aria-hidden="true" style="font-size:19px;"></i>
-                            </a>
+                            <?php if ($detail['status'] != 0) { ?>
+                                <a href="<?= base_url('donate/') . $detail['slug'] ?>" class="btn btn-primary" style="width: 58%;">Donasi
+                                    <i class="far fa-handshake ml-1" aria-hidden="true" style="font-size:19px;"></i>
+                                </a>
+                            <?php } else { ?>
+                                <span class="btn btn-primary" style="width: 58%;">Donasi Ditutup
+                                    <i class="far fa-handshake ml-1" aria-hidden="true" style="font-size:19px;"></i>
+                                </span>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
@@ -342,7 +358,7 @@
                     </ul>
                     <div class="tab-content tab-space" style="padding: 10px;">
                         <div class="tab-pane active" id="description-mobile">
-                            <i class="pull-right mt-1 text-14">><?= date('d F Y', strtotime($detail['tanggal_dibuat'])) ?></i>
+                            <i class="pull-right mt-1 text-14"><?= date('d F Y', strtotime($detail['tanggal_dibuat'])) ?></i>
                             <div class="tab-pane active py-3" role="tabpanel" id="tab-description" style="word-break: break-word;">
                                 <p>&nbsp;</p>
                                 <?= $detail['cerita']; ?>
@@ -423,7 +439,7 @@
                 </div>
 
                 <div class="row mt-3">
-                    <?php foreach ($donatur as $d) : ?>
+                    <?php foreach ($doacmp as $d) : ?>
                         <div class="col-md-3 col-sm-6 mb-2">
                             <div class="d-flex flex-row user-info">
                                 <img class="rounded-circle" src="<?= base_url('assets/img/users/profile/default.png') ?>" width="40" height="40">
@@ -490,7 +506,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Daftar Donasi: Bagikan Makanan Untuk Mereka</h5>
+                    <h5 class="modal-title">Daftar Donasi: <?= $title; ?></h5>
                 </div>
                 <div class="modal-body">
                     <div class="col-md-12">
@@ -504,11 +520,14 @@
                                                 <em class="text-black">#KawanPeduliGetHelp</em>
                                             </span>
                                             <br>
-                                            <span class="text-black">
-                                                Doa :
-                                            </span>
-                                            "<?= $d['doa']; ?>"
-                                            <br>
+                                            <?php if ($d['doa'] != '') { ?>
+                                                <span class="text-black">
+                                                    Doa :
+                                                </span>
+                                                "<?= $d['doa']; ?>"
+                                                <br>
+                                            <?php } else { ?>
+                                            <?php } ?>
                                             <span style="color:#000;font-size: 12px;">
                                                 <b><?= "Rp " . number_format($d['gross_amount'], 0, ',', '.'); ?></b>
                                             </span>
@@ -545,8 +564,10 @@
                                         <div class="d-flex flex-row user-info">
                                             <img class="rounded-circle" src="<?= base_url('assets/img/users/profile/default.png') ?>" width="40" height="40">
                                             <div class="d-flex flex-column justify-content-start ml-2">
-                                                <span class="d-block font-weight-bold name"><?= $d['oleh']; ?></span>
-                                                <span class="text-14 text-black-50"><?= time_ago($d['transaction_time']) ?></span>
+                                                <span>
+                                                    <em class="text-black">#KawanPeduliGetHelp</em>
+                                                </span>
+                                                <span class="text-14 text-black-50" style="color:#000;font-size: 12px;"><?= time_ago($d['transaction_time']) ?></span>
                                             </div>
                                         </div>
                                         <div class="mt-2">

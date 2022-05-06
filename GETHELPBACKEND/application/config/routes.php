@@ -9,14 +9,14 @@ $route['api/auth/register'] = 'api/auth/register';
 $route['userlogout'] = 'auth/userlogout';
 $route['auth'] = 'auth/index';
 // controller home
-$route['about'] = 'home/about';
-$route['terms'] = 'home/terms';
-$route['kebijakan-privasi'] = 'home/privasi';
+$route['about'] = 'utama/about';
+$route['terms'] = 'utama/terms';
+$route['kebijakan-privasi'] = 'utama/privasi';
 $route['verifikasi-akun'] = 'usersprofile/verifikasi';
 $route['verifikasi-akun-individu'] = 'usersprofile/verifikasi_individu';
 $route['verifikasi-akun-organisasi'] = 'usersprofile/verifikasi_organisasi';
-$route['kontak'] = 'home/kontak';
-
+$route['kontak'] = 'utama/kontak';
+$route['home/kontak'] = 'utama/kontak';
 //controller galang dana
 $route['panduan-galang-dana'] = 'galangdana';
 $route['form-galang-dana'] = 'galangdana/mulai';
@@ -27,6 +27,7 @@ $route['user'] = 'usersprofile/index';
 //snap
 $route['donate/(:any)'] = 'vtweb/index/$1';
 $route['thankspage'] = 'vtweb/finish';
+$route['notifikasi'] = 'vtweb/notification';
 
 //controller campaign
 $route['campaign'] = 'campaign/index';
@@ -36,6 +37,6 @@ $route['campaign/(:num)'] = 'campaign/index/$1';
 $route['campaign/(:any)'] = 'campaign/detail/$1';
 
 
-$route['default_controller'] = 'home';
-$route['404_override'] = '';
+$route['default_controller'] = 'utama';
+$route['404_override'] = 'errorpage/notfound';
 $route['translate_uri_dashes'] = FALSE;
